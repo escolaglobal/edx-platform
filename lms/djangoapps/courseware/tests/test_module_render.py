@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.test.client import RequestFactory
 from django.contrib.auth.models import AnonymousUser
+from functools import partial
 from mock import MagicMock, patch, Mock
 from opaque_keys.edx.keys import UsageKey, CourseKey
 from opaque_keys.edx.locations import SlashSeparatedCourseKey
