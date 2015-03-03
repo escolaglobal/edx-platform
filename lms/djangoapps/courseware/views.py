@@ -50,7 +50,7 @@ from util.cache import cache, cache_if_anonymous
 from xblock.fragment import Fragment
 from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError, NoPathToItem
-from xmodule.modulestore.search import path_to_location
+from xmodule.modulestore.search import path_to_location, navigation_index
 from xmodule.tabs import CourseTabList, StaffGradingTab, PeerGradingTab, OpenEndedGradingTab
 from xmodule.x_module import STUDENT_VIEW
 import shoppingcart
@@ -638,9 +638,23 @@ def jump_to(_request, course_id, location):
     elif section is None:
         return redirect('courseware_chapter', course_id=course_key.to_deprecated_string(), chapter=chapter)
     elif position is None:
-        return redirect('courseware_section', course_id=course_key.to_deprecated_string(), chapter=chapter, section=section)
+        return redirect(
+            'courseware_section',
+            course_id=course_key.to_deprecated_string(),
+            chapter=chapter,
+            section=section
+        )
     else:
-        return redirect('courseware_position', course_id=course_key.to_deprecated_string(), chapter=chapter, section=section, position=position)
+        # Here we use the navigation_index from the position returned from
+        # path_to_location - we can only navigate to the topmost vertical at the
+        # moment
+        return redirect(
+            'courseware_position',
+            course_id=course_key.to_deprecated_string(),
+            chapter=chapter,
+            section=section,
+            position=navigation_index(position)
+        )
 
 
 @ensure_csrf_cookie
