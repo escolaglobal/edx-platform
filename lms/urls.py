@@ -61,6 +61,9 @@ urlpatterns = (
 
     url(r'^heartbeat$', include('heartbeat.urls')),
 
+    # TODO jimabramson: put this in the right place
+    url(r'^api/profile_images/', include('openedx.core.djangoapps.profile_images.urls')),
+
     # Note: these are older versions of the User API that will eventually be
     # subsumed by api/user listed below.
     url(r'^user_api/', include('openedx.core.djangoapps.user_api.legacy_urls')),
