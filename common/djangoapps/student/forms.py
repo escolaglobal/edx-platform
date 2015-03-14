@@ -20,6 +20,9 @@ from util.password_policy_validators import (
     validate_password_dictionary,
 )
 
+from third_party_auth import pipeline
+from third_party_auth.forms import ThirdPartyAccessTokenForm
+
 
 class PasswordResetFormNoActive(PasswordResetForm):
     def clean_email(self):
@@ -99,7 +102,7 @@ _NAME_TOO_SHORT_MSG = _("Your legal name must be a minimum of two characters lon
 
 class AccountCreationForm(forms.Form):
     """
-    A form to for account creation data. It is currently only used for
+    A form for account creation data. It is currently only used for
     validation, not rendering.
     """
     # TODO: Resolve repetition
@@ -143,9 +146,11 @@ class AccountCreationForm(forms.Form):
             extended_profile_fields=None,
             enforce_username_neq_password=False,
             enforce_password_policy=False,
-            tos_required=True
+            tos_required=True,
+            *args,
+            **kwargs
     ):
-        super(AccountCreationForm, self).__init__(data)
+        super(AccountCreationForm, self).__init__(data, *args, **kwargs)
 
         extra_fields = extra_fields or {}
         self.extended_profile_fields = extended_profile_fields or {}
@@ -234,3 +239,11 @@ class AccountCreationForm(forms.Form):
             for key, value in self.cleaned_data.items()
             if key in self.extended_profile_fields and value is not None
         }
+
+
+class ThirdPartyAccountCreationForm(ThirdPartyAccessTokenForm):
+    """
+    A form for account creation with a third party access token.
+    It is currently only used for validation, not rendering.
+    """
+    THIRD_PARTY_AUTH_ENTRY_TYPE = pipeline.AUTH_ENTRY_REGISTER_API
