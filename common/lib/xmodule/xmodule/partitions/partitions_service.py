@@ -4,7 +4,7 @@ user partitions.  It uses the user_service key/value store provided by the LMS r
 persist the assignments.
 """
 from abc import ABCMeta, abstractproperty
-
+from pytz import UTC
 
 class PartitionService(object):
     """

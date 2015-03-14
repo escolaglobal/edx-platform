@@ -6,7 +6,7 @@ from stevedore.extension import ExtensionManager
 # We use ``id`` in this file as the IDs of our Groups and UserPartitions,
 # which Pylint disapproves of.
 # pylint: disable=invalid-name, redefined-builtin
-
+from pytz import utc
 
 class UserPartitionError(Exception):
     """
