@@ -694,7 +694,7 @@ def postpay_callback(request):
 
         # Only orders where order_items.count() == 1 might be attempting to upgrade
         attempting_upgrade = request.session.get('attempting_upgrade', False)
-        if attempting_upgrade:
+        if attempting_upgrade and result['order'].has_items(CertificateItem):
             course_id = result['order'].orderitem_set.all().select_subclasses()[0].course_id
             course_enrollment = CourseEnrollment.get_enrollment(request.user, course_id)
             if course_enrollment:
@@ -708,6 +708,7 @@ def postpay_callback(request):
         # Otherwise, send the user to the receipt page
         return HttpResponseRedirect(reverse('shoppingcart.views.show_receipt', args=[result['order'].id]))
     else:
+        request.session['attempting_upgrade'] = False
         return render_to_response('shoppingcart/error.html', {'order': result['order'],
                                                               'error_html': result['error_html']})
 

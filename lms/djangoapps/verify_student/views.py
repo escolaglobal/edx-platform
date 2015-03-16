@@ -368,8 +368,7 @@ class PayAndVerifyView(View):
 
         # Remember whether the user is upgrading
         # so we can fire an analytics event upon payment.
-        if message == self.UPGRADE_MSG:
-            request.session['attempting_upgrade'] = True
+        request.session['attempting_upgrade'] = (message == self.UPGRADE_MSG)
 
         # Render the top-level page
         context = {

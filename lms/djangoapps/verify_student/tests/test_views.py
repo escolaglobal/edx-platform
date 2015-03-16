@@ -96,7 +96,7 @@ class TestPayAndVerifyView(UrlResetMixin, ModuleStoreTestCase):
             PayAndVerifyView.PHOTO_ID_REQ,
             PayAndVerifyView.WEBCAM_REQ,
         ])
-        self._assert_upgrade_session_flag(None)
+        self._assert_upgrade_session_flag(False)
 
     @ddt.data("no-id-professional")
     def test_start_flow_with_no_id_professional(self, course_mode):
