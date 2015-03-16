@@ -276,12 +276,88 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("No course ", resp.content)
 
-    def _create_enrollment(self, course_id=None, username=None, expected_status=status.HTTP_200_OK, email_opt_in=None, as_server=False):
+    def test_create_enrollment_with_mode(self):
+        """With the right API key, create a new enrollment with a mode set other than the default."""
+        # Create a professional ed course mode.
+        CourseModeFactory.create(
+            course_id=self.course.id,
+            mode_slug='professional',
+            mode_display_name='professional',
+        )
+
+        # Create an enrollment
+        self._create_enrollment(as_server=True, mode='professional')
+
+        self.assertTrue(CourseEnrollment.is_enrolled(self.user, self.course.id))
+        course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
+        self.assertTrue(is_active)
+        self.assertEqual(course_mode, 'professional')
+
+    def test_update_enrollment_with_mode(self):
+        """With the right API key, update an existing enrollment with a new mode. """
+        # Create an honor and verified mode for a course. This allows an update.
+        for mode in ['honor', 'verified']:
+            CourseModeFactory.create(
+                course_id=self.course.id,
+                mode_slug=mode,
+                mode_display_name=mode,
+            )
+
+        # Create an enrollment
+        self._create_enrollment(as_server=True)
+
+        # Check that the enrollment is honor.
+        self.assertTrue(CourseEnrollment.is_enrolled(self.user, self.course.id))
+        course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
+        self.assertTrue(is_active)
+        self.assertEqual(course_mode, 'honor')
+
+        # Check that the enrollment upgraded to verified.
+        self._create_enrollment(as_server=True, mode='verified')
+        course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
+        self.assertTrue(is_active)
+        self.assertEqual(course_mode, 'verified')
+
+    def test_change_mode_from_user(self):
+        """Users should not be able to alter the enrollment mode on an enrollment. """
+        # Create an honor and verified mode for a course. This allows an update.
+        for mode in ['honor', 'verified']:
+            CourseModeFactory.create(
+                course_id=self.course.id,
+                mode_slug=mode,
+                mode_display_name=mode,
+            )
+
+        # Create an enrollment
+        self._create_enrollment()
+
+        # Check that the enrollment is honor.
+        self.assertTrue(CourseEnrollment.is_enrolled(self.user, self.course.id))
+        course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
+        self.assertTrue(is_active)
+        self.assertEqual(course_mode, 'honor')
+
+        # Get a 403 response when trying to upgrade yourself.
+        self._create_enrollment(mode='verified', expected_status=status.HTTP_403_FORBIDDEN)
+        course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
+        self.assertTrue(is_active)
+        self.assertEqual(course_mode, 'honor')
+
+    def _create_enrollment(
+            self,
+            course_id=None,
+            username=None,
+            expected_status=status.HTTP_200_OK,
+            email_opt_in=None,
+            as_server=False,
+            mode='honor',
+    ):
         """Enroll in the course and verify the URL we are sent to. """
         course_id = unicode(self.course.id) if course_id is None else course_id
         username = self.user.username if username is None else username
 
         params = {
+            'mode': mode,
             'course_details': {
                 'course_id': course_id
             },
@@ -299,7 +375,7 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
         if expected_status == status.HTTP_200_OK:
             data = json.loads(resp.content)
             self.assertEqual(course_id, data['course_details']['course_id'])
-            self.assertEqual('honor', data['mode'])
+            self.assertEqual(mode, data['mode'])
             self.assertTrue(data['is_active'])
         return resp
 

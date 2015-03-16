@@ -213,19 +213,26 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
 
             2. Enroll the currently logged in user in a course.
 
-               Currently you can use this command only to enroll the user in "honor" mode.
+               Currently a user can use this command only to enroll the user in "honor" mode.
 
                If honor mode is not supported for the course, the request fails and returns the available modes.
+
+               A server-to-server call can be used by this command to enroll a user in other modes, such as "verified"
+                    or "professional". If the mode is not supposed for the course, the request will fail and return the
+                    available modes.
 
         **Example Requests**:
 
             GET /api/enrollment/v1/enrollment
 
-            POST /api/enrollment/v1/enrollment{"course_details":{"course_id": "edX/DemoX/Demo_Course"}}
+            POST /api/enrollment/v1/enrollment{"mode": "honor", "course_details":{"course_id": "edX/DemoX/Demo_Course"}}
 
         **Post Parameters**
 
             * user:  The user ID of the currently logged in user. Optional. You cannot use the command to enroll a different user.
+
+            * mode: The Course Mode for the enrollment. Individual users cannot upgrade their enrollment mode from
+                'honor'. Only server to server requests can enroll with other modes. Optional.
 
             * course details: A collection that contains:
 
@@ -325,6 +332,17 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
                 }
             )
 
+        mode = request.DATA.get('mode', 'honor')
+        if mode != 'honor' and not self.has_api_key_permissions(request):
+            return Response(
+                status=status.HTTP_403_FORBIDDEN,
+                data={
+                    "message": u"User does not have permission to create enrollment with mode [{mode}].".format(
+                        mode=mode
+                    )
+                }
+            )
+
         # Check whether any country access rules block the user from enrollment
         # We do this at the view level (rather than the Python API level)
         # because this check requires information about the HTTP request.
@@ -345,12 +363,23 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
             )
 
         try:
-            response = api.add_enrollment(user, unicode(course_id))
+            # Check to see if the enrollment mode is something other than honor. If so, check to see if the user
+            # is enrolled, and if so, perform an upgrade instead of creating a new enrollment.
+            enrollment = {}
+            http_success_status = status.HTTP_200_OK
+            if mode is not 'honor':
+                enrollment = api.get_enrollment(user, unicode(course_id))
+            if enrollment:
+                response = api.update_enrollment(user, unicode(course_id), mode=mode)
+                http_success_status = status.HTTP_200_OK
+            else:
+                response = api.add_enrollment(user, unicode(course_id), mode=mode)
+                http_success_status = status.HTTP_201_CREATED
             email_opt_in = request.DATA.get('email_opt_in', None)
             if email_opt_in is not None:
                 org = course_id.org
                 user_api.profile.update_email_opt_in(request.user, org, email_opt_in)
-            return Response(response)
+            return Response(response, status=http_success_status)
         except CourseModeNotFoundError as error:
             return Response(
                 status=status.HTTP_400_BAD_REQUEST,
