@@ -1,63 +1,48 @@
 """
-
-POST /uploads
-
-* 'file' must be set
-* 'file' must have acceptable mime type
-* 'file' must have acceptable extension
-* 'file' must be within acceptable size range
-
-* authentication
-* authorization
-
-* response content...
-* response structure...
-
 """
+
 import os
 from tempfile import NamedTemporaryFile
 
 import ddt
 from django.core.urlresolvers import reverse
+from django.test.utils import override_settings
 import mock
 from PIL import Image
 from rest_framework.test import APITestCase, APIClient
 
 from student.tests.factories import UserFactory
 
-from ...user_api.accounts.helpers import get_profile_image_storage, get_profile_image_filename, PROFILE_IMAGE_SIZES, PROFILE_IMAGE_FORMAT
-from ..views import DEV_MSG_FILE_TOO_LARGE, DEV_MSG_FILE_TOO_SMALL, DEV_MSG_FILE_BAD_TYPE, DEV_MSG_FILE_BAD_EXT, DEV_MSG_FILE_BAD_MIMETYPE
+from ...user_api.accounts.helpers import get_profile_image_storage, get_profile_image_name, get_profile_image_filename, PROFILE_IMAGE_SIZES
+from ...user_api.accounts.api import set_has_profile_image
+from ..images import DEV_MSG, generate_profile_images
 
 TEST_PASSWORD = "test"
 
 
-@ddt.ddt
-class ProfileImageUploadTestCase(APITestCase):
+class ProfileImageEndpointTestCase(APITestCase):
+    """
+    Base class / shared infrastructure for tests of profile_image "upload" and
+    "remove" endpoints.
+    """
+
+    # subclasses should override this with the name of the view under test, as
+    # per the urls.py configuration.
+    _view_name = None
 
     def setUp(self):
-        super(ProfileImageUploadTestCase, self).setUp()
-        self.anonymous_client = APIClient()
-        self.different_user = UserFactory.create(password=TEST_PASSWORD)
-        self.different_client = APIClient()
-        self.staff_user = UserFactory(is_staff=True, password=TEST_PASSWORD)
-        self.staff_client = APIClient()
+        super(ProfileImageEndpointTestCase, self).setUp()
         self.user = UserFactory.create(password=TEST_PASSWORD)
-        self.url = reverse("profile_image_upload", kwargs={'username': self.user.username})
+        self.url = reverse(self._view_name, kwargs={'username': self.user.username})
+        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         self.storage = get_profile_image_storage()
-        for size in PROFILE_IMAGE_SIZES.values():
-            self.storage.delete(get_profile_image_filename(self.user.username, size))
+        # this assertion is made here as a sanity check because all tests
+        # assume user.profile.has_profile_image is False by default
+        self.assertFalse(self.user.profile.has_profile_image)
 
     def tearDown(self):
         for size in PROFILE_IMAGE_SIZES.values():
-            self.storage.delete(get_profile_image_filename(self.user.username, size))
-
-    def test_anonymous_access(self):
-        """
-        Test that an anonymous client (not logged in) cannot call GET or POST.
-        """
-        for request in (self.anonymous_client.get, self.anonymous_client.post):
-            response = request(self.url)
-            self.assertEqual(401, response.status_code)
+            self.storage.delete(get_profile_image_filename(get_profile_image_name(self.user.username), size))
 
     def _make_image_file(self, dimensions=(320, 240), extension=".jpeg", force_size=None):
         """
@@ -83,16 +68,19 @@ class ProfileImageUploadTestCase(APITestCase):
         image_file.seek(0)
         return image_file
 
-    def _get_thumbnail_names(self, username):
+    def _get_image_names(self, username):
         """
         Return a dict with {size: filename} for each thumbnail
         """
-        return {dimension: get_profile_image_filename(username, str(dimension)) for dimension in PROFILE_IMAGE_SIZES.values()}
+        return {
+            dimension: get_profile_image_filename(get_profile_image_name(username), dimension)
+            for dimension in PROFILE_IMAGE_SIZES.values()
+        }
 
-    def assert_thumbnails(self, exist=True):
+    def check_images(self, exist=True):
         """
         """
-        for size, name in self._get_thumbnail_names(self.user.username).items():
+        for size, name in self._get_image_names(self.user.username).items():
             if exist:
                 self.assertTrue(self.storage.exists(name))
                 img = Image.open(self.storage.path(name))
@@ -101,96 +89,138 @@ class ProfileImageUploadTestCase(APITestCase):
             else:
                 self.assertFalse(self.storage.exists(name))
 
+    def check_response(self, response, expected_code, expected_message=None):
+        self.assertEqual(expected_code, response.status_code)
+        if expected_code==200:
+            self.assertEqual({"status": "success"}, response.data)
+        elif expected_message is not None:
+            self.assertEqual(response.data.get('developer_message'), expected_message)
+
+    def check_has_profile_image(self, has_profile_image=True):
+        """
+        """
+        # it's necessary to reload this model from the database since save()
+        # would have been called on another instance.
+        profile = self.user.profile.__class__.objects.get(user=self.user)
+        self.assertEqual(profile.has_profile_image, has_profile_image)
+
+
+@ddt.ddt
+class ProfileImageUploadTestCase(ProfileImageEndpointTestCase):
+
+    _view_name = "profile_image_upload"
+
+    def test_anonymous_access(self):
+        """
+        Test that an anonymous client (not logged in) cannot call GET or POST.
+        """
+        anonymous_client = APIClient()
+        for request in (anonymous_client.get, anonymous_client.post):
+            response = request(self.url)
+            self.assertEqual(401, response.status_code)
+
     def test_upload_self(self):
         """
         Test that an authenticated user can POST to their own upload endpoint.
         """
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         response = self.client.post(self.url, {'file': self._make_image_file()}, format='multipart')
-        self.assertEqual(200, response.status_code)
-        self.assertEqual({"status": "success"}, response.data)
-        self.assert_thumbnails()
+        self.check_response(response, 200)
+        self.check_images()
+        self.check_has_profile_image()
 
     def test_upload_other(self):
         """
         Test that an authenticated user cannot POST to another user's upload endpoint.
         """
-        self.different_client.login(username=self.different_user.username, password=TEST_PASSWORD)
-        response = self.different_client.post(self.url, {'file': self._make_image_file()}, format='multipart')
-        self.assertEqual(403, response.status_code)
-        self.assert_thumbnails(False)
+        different_user = UserFactory.create(password=TEST_PASSWORD)
+        different_client = APIClient()
+        different_client.login(username=different_user.username, password=TEST_PASSWORD)
+        response = different_client.post(self.url, {'file': self._make_image_file()}, format='multipart')
+        self.check_response(response, 403)
+        self.check_images(False)
+        self.check_has_profile_image(False)
 
     def test_upload_staff(self):
         """
         Test that an authenticated staff user can POST to another user's upload endpoint.
         """
-        self.staff_client.login(username=self.staff_user.username, password=TEST_PASSWORD)
-        response = self.staff_client.post(self.url, {'file': self._make_image_file()}, format='multipart')
-        self.assertEqual(200, response.status_code)
-        self.assertEqual({"status": "success"}, response.data)
-        self.assert_thumbnails(True)
+        staff_user = UserFactory(is_staff=True, password=TEST_PASSWORD)
+        staff_client = APIClient()
+        staff_client.login(username=staff_user.username, password=TEST_PASSWORD)
+        response = staff_client.post(self.url, {'file': self._make_image_file()}, format='multipart')
+        self.check_response(response, 200)
+        self.check_images()
+        self.check_has_profile_image()
 
     def test_upload_missing_file(self):
         """
         Test that omitting the file entirely from the POST results in HTTP 400.
         """
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         response = self.client.post(self.url, {}, format='multipart')
-        self.assertEqual(400, response.status_code)
-        self.assert_thumbnails(False)
+        self.check_response(response, 400)
+        self.check_images(False)
+        self.check_has_profile_image(False)
 
     def test_upload_not_a_file(self):
         """
         Test that sending unexpected data that isn't a file results in HTTP 400.
         """
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         response = self.client.post(self.url, {'file': 'not a file'}, format='multipart')
-        self.assertEqual(400, response.status_code)
-        self.assert_thumbnails(False)
+        self.check_response(response, 400)
+        self.check_images(False)
+        self.check_has_profile_image(False)
 
-    def test_upload_file_too_large(self):
+    @ddt.data((1024, False), (1025, True))
+    @ddt.unpack
+    @override_settings(PROFILE_IMAGE_MAX_BYTES=1024)
+    def test_upload_file_too_large(self, upload_size, should_fail):
         """
         """
-        image_file = self._make_image_file(force_size=(1024 * 1024) + 1)  # TODO settings / override settings
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
+        image_file = self._make_image_file(dimensions=(1, 1), extension=".png", force_size=upload_size)
         response = self.client.post(self.url, {'file': image_file}, format='multipart')
-        self.assertEqual(400, response.status_code)
-        self.assertEqual(response.data.get('developer_message'), DEV_MSG_FILE_TOO_LARGE)
-        self.assert_thumbnails(False)
+        if should_fail:
+            self.check_response(response, 400, DEV_MSG.FILE_TOO_LARGE)
+        else:
+            self.check_response(response, 200)
+        self.check_images(not should_fail)
+        self.check_has_profile_image(not should_fail)
 
-    def test_upload_file_too_small(self):
+    @ddt.data((99, True), (100, False))
+    @ddt.unpack
+    @override_settings(PROFILE_IMAGE_MIN_BYTES=100)
+    def test_upload_file_too_small(self, upload_size, should_fail):
         """
         """
-        image_file = self._make_image_file(dimensions=(1, 1), extension=".png", force_size=99)  # TODO settings / override settings
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
+        image_file = self._make_image_file(dimensions=(1, 1), extension=".png", force_size=upload_size)
         response = self.client.post(self.url, {'file': image_file}, format='multipart')
-        self.assertEqual(400, response.status_code)
-        self.assertEqual(response.data.get('developer_message'), DEV_MSG_FILE_TOO_SMALL)
-        self.assert_thumbnails(False)
+        if should_fail:
+            self.check_response(response, 400, DEV_MSG.FILE_TOO_SMALL)
+        else:
+            self.check_response(response, 200)
+        self.check_images(not should_fail)
+        self.check_has_profile_image(not should_fail)
 
     def test_upload_bad_extension(self):
         """
         """
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         response = self.client.post(self.url, {'file': self._make_image_file(extension=".bmp")}, format='multipart')
-        self.assertEqual(400, response.status_code)
-        self.assertEqual(response.data.get('developer_message'), DEV_MSG_FILE_BAD_TYPE)
-        self.assert_thumbnails(False)
+        self.check_response(response, 400, DEV_MSG.FILE_BAD_TYPE)
+        self.check_images(False)
+        self.check_has_profile_image(False)
 
     # ext / header mismatch
     def test_upload_wrong_extension(self):
         """
         """
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         # make a bmp, rename it to jpeg
         bmp_file = self._make_image_file(extension=".bmp")
         fake_jpeg_file = NamedTemporaryFile(suffix=".jpeg")
         fake_jpeg_file.write(bmp_file.read())
         fake_jpeg_file.seek(0)
         response = self.client.post(self.url, {'file': fake_jpeg_file}, format='multipart')
-        self.assertEqual(400, response.status_code)
-        self.assertEqual(response.data.get('developer_message'), DEV_MSG_FILE_BAD_EXT)
-        self.assert_thumbnails(False)
+        self.check_response(response, 400, DEV_MSG.FILE_BAD_EXT)
+        self.check_images(False)
+        self.check_has_profile_image(False)
 
     # content-type / header mismatch
     @mock.patch('django.test.client.mimetypes')
@@ -198,11 +228,10 @@ class ProfileImageUploadTestCase(APITestCase):
         """
         """
         mock_mimetypes.guess_type.return_value = ['image/gif']
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         response = self.client.post(self.url, {'file': self._make_image_file(extension=".jpeg")}, format='multipart')
-        self.assertEqual(400, response.status_code)
-        self.assertEqual(response.data.get('developer_message'), DEV_MSG_FILE_BAD_MIMETYPE)
-        self.assert_thumbnails(False)
+        self.check_response(response, 400, DEV_MSG.FILE_BAD_MIMETYPE)
+        self.check_images(False)
+        self.check_has_profile_image(False)
 
     @ddt.data(
         (1, 1), (10, 10), (100, 100), (1000, 1000),
@@ -213,8 +242,67 @@ class ProfileImageUploadTestCase(APITestCase):
         use a variety of input image sizes to ensure that the output pictures
         are all properly scaled
         """
-        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         response = self.client.post(self.url, {'file': self._make_image_file(size)}, format='multipart')
-        self.assertEqual(200, response.status_code)
-        self.assertEqual({"status": "success"}, response.data)
-        self.assert_thumbnails()
+        self.check_response(response, 200)
+        self.check_images()
+
+
+class ProfileImageRemoveTestCase(ProfileImageEndpointTestCase):
+
+    _view_name = "profile_image_remove"
+
+    def setUp(self):
+        super(ProfileImageRemoveTestCase, self).setUp()
+        generate_profile_images(self._make_image_file(), self.user.username)
+        self.check_images()
+        set_has_profile_image(self.user.username, True)
+
+    def test_anonymous_access(self):
+        """
+        Test that an anonymous client (not logged in) cannot call GET or POST.
+        """
+        anonymous_client = APIClient()
+        for request in (anonymous_client.get, anonymous_client.post):
+            response = request(self.url)
+            self.assertEqual(401, response.status_code)
+
+    def test_remove_self(self):
+        """
+        Test that an authenticated user can POST to remove their own profile
+        images.
+        """
+        response = self.client.post(self.url)
+        self.check_response(response, 200)
+        self.check_images(False)
+        self.check_has_profile_image(False)
+
+    def test_remove_other(self):
+        """
+        Test that an authenticated user cannot POST to remove another user's
+        profile images.
+        """
+        generate_profile_images(self._make_image_file(), self.user.username)
+        self.check_images()
+        different_user = UserFactory.create(password=TEST_PASSWORD)
+        different_client = APIClient()
+        different_client.login(username=different_user.username, password=TEST_PASSWORD)
+        response = different_client.post(self.url)
+        self.check_response(response, 403)
+        self.check_images(True)  # thumbnails should remain intact.
+        self.check_has_profile_image(True)
+
+    def test_remove_staff(self):
+        """
+        Test that an authenticated staff user can POST to remove another user's
+        profile images.
+        """
+        generate_profile_images(self._make_image_file(), self.user.username)
+        self.check_images()
+        staff_user = UserFactory(is_staff=True, password=TEST_PASSWORD)
+        staff_client = APIClient()
+        staff_client.login(username=staff_user.username, password=TEST_PASSWORD)
+        response = self.client.post(self.url)
+        self.check_response(response, 200)
+        self.check_images(False)
+        self.check_has_profile_image(False)
+

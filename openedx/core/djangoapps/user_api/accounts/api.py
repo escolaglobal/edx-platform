@@ -234,6 +234,7 @@ def _add_serializer_errors(update, serializer, field_errors):
 def set_has_profile_image(username, has_profile_image=True):
     """
     """
+    # TODO this is almost certainly not the most efficient access path
     try:
         existing_user = User.objects.get(username=username)
         existing_user_profile = UserProfile.objects.get(user=existing_user)
@@ -242,3 +243,4 @@ def set_has_profile_image(username, has_profile_image=True):
 
     existing_user_profile.has_profile_image = has_profile_image
     existing_user_profile.save()
+    print 'existing_user_profile', existing_user_profile.id, existing_user_profile.has_profile_image

@@ -1,9 +1,4 @@
 from contextlib import closing
-from cStringIO import StringIO
-
-from django.core.files.base import ContentFile
-
-from PIL import Image
 
 from rest_framework import permissions, status
 from rest_framework.authentication import OAuth2Authentication, SessionAuthentication
@@ -11,138 +6,16 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..user_api.accounts.helpers import get_profile_image_storage, get_profile_image_name, get_profile_image_filename, PROFILE_IMAGE_SIZES
 from ..user_api.accounts.api import set_has_profile_image
 
-
-# TODO: move these to settings
-PROFILE_IMAGE_MAX_BYTES = 1024 * 1024
-PROFILE_IMAGE_MIN_BYTES = 100
-
-
-DEV_MSG_FILE_TOO_LARGE = 'Maximum file size exceeded.'
-DEV_MSG_FILE_TOO_SMALL = 'Minimum file size not met.'
-DEV_MSG_FILE_BAD_TYPE = 'Unsupported file type.'
-DEV_MSG_FILE_BAD_EXT = 'File extension does not match data.'
-DEV_MSG_FILE_BAD_MIMETYPE = 'Content-Type header does not match data.'
-
-
-class InvalidProfileImage(Exception):
-    """
-    Local Exception type that helps us clean up after file validation
-    failures, and communicate what went wrong to the user.
-    """
-    pass
-
-
-def validate_uploaded_image(image_file, content_type):
-    """
-    Raises an InvalidProfileImage if the server should refuse to store this
-    uploaded file as a user's profile image.
-
-    Otherwise, returns a cleaned version of the extension as a string, i.e. one
-    of: ('gif', 'jpeg', 'png')
-    """
-    # TODO: better to just use PIL for this?  seems like it
-
-    image_types = {
-        'jpeg' : {
-            'extension': [".jpeg", ".jpg"],
-            'mimetypes': ['image/jpeg', 'image/pjpeg'],
-            'magic': ["ffd8"]
-            },
-        'png': {
-            'extension': [".png"],
-            'mimetypes': ['image/png'],
-            'magic': ["89504e470d0a1a0a"]
-            },
-        'gif': {
-            'extension': [".gif"],
-            'mimetypes': ['image/gif'],
-            'magic': ["474946383961", "474946383761"]
-            }
-        }
-
-    # check file size
-    if image_file.size > PROFILE_IMAGE_MAX_BYTES:
-        raise InvalidProfileImage(DEV_MSG_FILE_TOO_LARGE)
-    elif image_file.size < PROFILE_IMAGE_MIN_BYTES:
-        raise InvalidProfileImage(DEV_MSG_FILE_TOO_SMALL)
-
-    # check the file extension looks acceptable
-    filename = str(image_file.name).lower()
-    filetype = [ft for ft in image_types if any(filename.endswith(ext) for ext in image_types[ft]['extension'])]
-    if not filetype:
-        raise InvalidProfileImage(DEV_MSG_FILE_BAD_TYPE)
-    filetype = filetype[0]
-
-    # check mimetype matches expected file type
-    if content_type not in image_types[filetype]['mimetypes']:
-        raise InvalidProfileImage(DEV_MSG_FILE_BAD_MIMETYPE)
-
-    # check image file headers match expected file type
-    headers = image_types[filetype]['magic']
-    if image_file.read(len(headers[0])/2).encode('hex') not in headers:
-        raise InvalidProfileImage(DEV_MSG_FILE_BAD_EXT)
-    # avoid unexpected errors from subsequent modules expecting the fp to be at 0
-    image_file.seek(0)
-    return filetype
-
-
-def get_scaled_image_file(image_obj, side):
-    """
-    """
-    scaled = image_obj.resize((side, side), Image.ANTIALIAS)
-    string_io = StringIO()
-    scaled.save(string_io, format='JPEG')
-    image_file = ContentFile(string_io.getvalue())
-    return image_file
-
-
-def store_profile_image(image_file, side, username):
-    """
-    Permanently store the contents of the uploaded_file as this user's profile
-    image, in whatever storage backend we're configured to use.  Any
-    previously-stored profile image will be overwritten.
-
-    Returns the path to the stored file.
-    """
-    storage = get_profile_image_storage()
-    name = get_profile_image_name(username)
-    dest_name = get_profile_image_filename(name, side)
-    if storage.exists(dest_name):   # TODO just overwrite, don't delete first.  Have to override FileStorage to do that.
-        storage.delete(dest_name)
-    path = storage.save(dest_name, image_file)
-
-
-def generate_profile_images(image_file, username):
-    """
-    """
-    image_obj = Image.open(image_file)
-
-    # first center-crop the image if needed (but no scaling yet).
-    width, height = image_obj.size
-    if width != height:
-        side = width if width < height else height
-        image_obj = image_obj.crop(((width-side)/2, (height-side)/2, (width+side)/2, (height+side)/2))
-
-    for side in [30, 50, 120, 500]:
-        scaled_image_file = get_scaled_image_file(image_obj, side)
-        # Store the file.
-        store_profile_image(scaled_image_file, side, username)
-
-
-def remove_profile_images(username):
-    """
-    """
-    storage = get_profile_image_storage()
-    name = get_profile_image_name(username)
-    for size in PROFILE_IMAGE_SIZES.values():
-        dest_name = get_profile_image_filename(name, size)
-        storage.delete(dest_name)
+from .images import validate_uploaded_image, generate_profile_images, remove_profile_images, ImageFileRejected
 
 
 class ProfileImageUploadView(APIView):
+    """
+    Provides a POST endpoint to generate new profile image files for a given
+    user, using an uploaded source image.
+    """
 
     parser_classes = (MultiPartParser, FormParser,)
 
@@ -151,16 +24,17 @@ class ProfileImageUploadView(APIView):
 
     def post(self, request, username):
 
-        # request validation.
-
+        # validate request:
         # ensure authenticated user is either same as username, or is staff.
         if request.user.username != username and not request.user.is_staff:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        # ensure file exists at all!
+        # validate request:
+        # ensure any file was sent
         if 'file' not in request.FILES:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+        # process the upload.
         uploaded_file = request.FILES['file']
 
         # no matter what happens, delete the temporary file when we're done
@@ -169,11 +43,11 @@ class ProfileImageUploadView(APIView):
             # image file validation.
             try:
                 validate_uploaded_image(uploaded_file, uploaded_file.content_type)
-            except InvalidProfileImage, e:
+            except ImageFileRejected, e:
                 return Response(
                     {
                         "developer_message": e.message,
-                        "user_message": None
+                        "user_message": None  # TODO do we need user messages in this API?
                     },
                     status = status.HTTP_400_BAD_REQUEST
                 )
@@ -184,28 +58,30 @@ class ProfileImageUploadView(APIView):
             # update the user account to reflect that a profile image is available.
             set_has_profile_image(username, True)
 
-        # send user response.
+        # send client response.
         return Response({"status": "success"})
 
 
 class ProfileImageRemoveView(APIView):
+    """
+    Provides a POST endpoint to delete all profile image files for a given user
+    """
 
     authentication_classes = (OAuth2Authentication, SessionAuthentication)
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, username):
 
-        # request validation.
-
+        # validate request:
         # ensure authenticated user is either same as username, or is staff.
         if request.user.username != username and not request.user.is_staff:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        # generate profile pic and thumbnails and store them
+        # remove physical files from storage.
         remove_profile_images(username)
 
-        # update the user account to reflect that a profile image is available.
+        # update the user account to reflect that the images were removed.
         set_has_profile_image(username, False)
 
-        # send user response.
+        # send client response.
         return Response({"status": "success"})
