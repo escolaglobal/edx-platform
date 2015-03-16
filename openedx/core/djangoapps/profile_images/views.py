@@ -1,9 +1,6 @@
 from contextlib import closing
-import hashlib
 from cStringIO import StringIO
 
-from django.conf import settings
-from django.core.files.storage import get_storage_class
 from django.core.files.base import ContentFile
 
 from PIL import Image
@@ -14,8 +11,11 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from ..user_api.accounts.helpers import get_profile_image_storage, get_profile_image_name, get_profile_image_filename, PROFILE_IMAGE_SIZES
+from ..user_api.accounts.api import set_has_profile_image
+
+
 # TODO: move these to settings
-PROFILE_IMAGE_STORAGE_CLASS = 'django.core.files.storage.FileSystemStorage'
 PROFILE_IMAGE_MAX_BYTES = 1024 * 1024
 PROFILE_IMAGE_MIN_BYTES = 100
 
@@ -35,7 +35,7 @@ class InvalidProfileImage(Exception):
     pass
 
 
-def validate_profile_image(image_file, content_type):
+def validate_uploaded_image(image_file, content_type):
     """
     Raises an InvalidProfileImage if the server should refuse to store this
     uploaded file as a user's profile image.
@@ -99,18 +99,6 @@ def get_scaled_image_file(image_obj, side):
     return image_file
 
 
-def get_profile_image_storage():
-    """
-    """
-    return get_storage_class(PROFILE_IMAGE_STORAGE_CLASS)()
-
-
-def name_profile_image(username, side):
-    """
-    """
-    return '{}_profile_{}.jpeg'.format(hashlib.md5(username).hexdigest(), str(side))
-
-
 def store_profile_image(image_file, side, username):
     """
     Permanently store the contents of the uploaded_file as this user's profile
@@ -120,11 +108,11 @@ def store_profile_image(image_file, side, username):
     Returns the path to the stored file.
     """
     storage = get_profile_image_storage()
-    dest_name = name_profile_image(username, side)
+    name = get_profile_image_name(username)
+    dest_name = get_profile_image_filename(name, side)
     if storage.exists(dest_name):   # TODO just overwrite, don't delete first.  Have to override FileStorage to do that.
         storage.delete(dest_name)
     path = storage.save(dest_name, image_file)
-    return path
 
 
 def generate_profile_images(image_file, username):
@@ -142,6 +130,16 @@ def generate_profile_images(image_file, username):
         scaled_image_file = get_scaled_image_file(image_obj, side)
         # Store the file.
         store_profile_image(scaled_image_file, side, username)
+
+
+def remove_profile_images(username):
+    """
+    """
+    storage = get_profile_image_storage()
+    name = get_profile_image_name(username)
+    for size in PROFILE_IMAGE_SIZES.values():
+        dest_name = get_profile_image_filename(name, size)
+        storage.delete(dest_name)
 
 
 class ProfileImageUploadView(APIView):
@@ -170,7 +168,7 @@ class ProfileImageUploadView(APIView):
 
             # image file validation.
             try:
-                validate_profile_image(uploaded_file, uploaded_file.content_type)
+                validate_uploaded_image(uploaded_file, uploaded_file.content_type)
             except InvalidProfileImage, e:
                 return Response(
                     {
@@ -184,7 +182,30 @@ class ProfileImageUploadView(APIView):
             generate_profile_images(uploaded_file, username)
 
             # update the user account to reflect that a profile image is available.
-            # TODO
+            set_has_profile_image(username, True)
+
+        # send user response.
+        return Response({"status": "success"})
+
+
+class ProfileImageRemoveView(APIView):
+
+    authentication_classes = (OAuth2Authentication, SessionAuthentication)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, username):
+
+        # request validation.
+
+        # ensure authenticated user is either same as username, or is staff.
+        if request.user.username != username and not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        # generate profile pic and thumbnails and store them
+        remove_profile_images(username)
+
+        # update the user account to reflect that a profile image is available.
+        set_has_profile_image(username, False)
 
         # send user response.
         return Response({"status": "success"})

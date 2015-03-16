@@ -25,7 +25,8 @@ from rest_framework.test import APITestCase, APIClient
 
 from student.tests.factories import UserFactory
 
-from ..views import DEV_MSG_FILE_TOO_LARGE, DEV_MSG_FILE_TOO_SMALL, DEV_MSG_FILE_BAD_TYPE, DEV_MSG_FILE_BAD_EXT, DEV_MSG_FILE_BAD_MIMETYPE, name_profile_image, get_profile_image_storage
+from ...user_api.accounts.helpers import get_profile_image_storage, get_profile_image_filename, PROFILE_IMAGE_SIZES, PROFILE_IMAGE_FORMAT
+from ..views import DEV_MSG_FILE_TOO_LARGE, DEV_MSG_FILE_TOO_SMALL, DEV_MSG_FILE_BAD_TYPE, DEV_MSG_FILE_BAD_EXT, DEV_MSG_FILE_BAD_MIMETYPE
 
 TEST_PASSWORD = "test"
 
@@ -43,16 +44,12 @@ class ProfileImageUploadTestCase(APITestCase):
         self.user = UserFactory.create(password=TEST_PASSWORD)
         self.url = reverse("profile_image_upload", kwargs={'username': self.user.username})
         self.storage = get_profile_image_storage()
-        self.storage.delete(name_profile_image(self.user.username, '30'))
-        self.storage.delete(name_profile_image(self.user.username, '50'))
-        self.storage.delete(name_profile_image(self.user.username, '120'))
-        self.storage.delete(name_profile_image(self.user.username, '500'))
+        for size in PROFILE_IMAGE_SIZES.values():
+            self.storage.delete(get_profile_image_filename(self.user.username, size))
 
     def tearDown(self):
-        self.storage.delete(name_profile_image(self.user.username, '30'))
-        self.storage.delete(name_profile_image(self.user.username, '50'))
-        self.storage.delete(name_profile_image(self.user.username, '120'))
-        self.storage.delete(name_profile_image(self.user.username, '500'))
+        for size in PROFILE_IMAGE_SIZES.values():
+            self.storage.delete(get_profile_image_filename(self.user.username, size))
 
     def test_anonymous_access(self):
         """
@@ -90,7 +87,7 @@ class ProfileImageUploadTestCase(APITestCase):
         """
         Return a dict with {size: filename} for each thumbnail
         """
-        return {dimension: name_profile_image(username, str(dimension)) for dimension in (30, 50, 120, 500)}
+        return {dimension: get_profile_image_filename(username, str(dimension)) for dimension in PROFILE_IMAGE_SIZES.values()}
 
     def assert_thumbnails(self, exist=True):
         """

@@ -15,6 +15,31 @@ PROFILE_IMAGE_SIZES = {
 PROFILE_IMAGE_FORMAT = 'jpg'
 
 
+def get_profile_image_storage():
+    """
+    """
+    # Note that, for now, the backend will be FileSystemStorage.  When
+    # we eventually support s3 storage, we'll need to pass a parameter
+    # to the storage class indicating the s3 bucket which we're using
+    # for profile picture uploads.
+    storage_class = get_storage_class(settings.PROFILE_IMAGE_BACKEND)
+    if storage_class == FileSystemStorage:
+        kwargs = {'base_url': (settings.PROFILE_IMAGE_DOMAIN + settings.PROFILE_IMAGE_URL_PATH)}
+    return storage_class(**kwargs)
+
+
+def get_profile_image_name(username):
+    """
+    """
+    return hashlib.md5(settings.PROFILE_IMAGE_SECRET_KEY + username).hexdigest()
+
+
+def get_profile_image_filename(name, size):
+    """
+    """
+    return '{name}_{size}.{format}'.format(name=name, size=size, format=PROFILE_IMAGE_FORMAT)
+
+
 def get_profile_image_url_for_user(user, size):
     """Return the URL to a user's profile image for a given size.
     Note that based on the value of
@@ -39,18 +64,9 @@ def get_profile_image_url_for_user(user, size):
         raise ValueError('Unsupported profile image size: {size}'.format(size=size))
 
     if user.profile.has_profile_image:
-        name = hashlib.md5(settings.PROFILE_IMAGE_SECRET_KEY + user.username).hexdigest()
+        name = get_profile_image_name(user.username)
     else:
         name = settings.PROFILE_IMAGE_DEFAULT_FILENAME
 
-    filename = '{name}_{size}.{format}'.format(name=name, size=size, format=PROFILE_IMAGE_FORMAT)
-
-    # Note that, for now, the backend will be FileSystemStorage.  When
-    # we eventually support s3 storage, we'll need to pass a parameter
-    # to the storage class indicating the s3 bucket which we're using
-    # for profile picture uploads.
-    storage_class = get_storage_class(settings.PROFILE_IMAGE_BACKEND)
-    if storage_class == FileSystemStorage:
-        kwargs = {'base_url': (settings.PROFILE_IMAGE_DOMAIN + settings.PROFILE_IMAGE_URL_PATH)}
-    storage = storage_class(**kwargs)
-    return storage.url(filename)
+    filename = get_profile_image_filename(name, size)
+    return get_profile_image_storage().url(filename)
