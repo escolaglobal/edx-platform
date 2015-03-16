@@ -366,6 +366,9 @@ FEATURES = {
 
     # Certificates Web/HTML Views
     'CERTIFICATES_HTML_VIEW': False,
+
+    # Enables the processing of orders via the external E-Commerce Service
+    'CREATE_ORDERS_WITH_ECOMMERCE_SERVICE': False,
 }
 
 # Ignore static asset files on import which match this pattern

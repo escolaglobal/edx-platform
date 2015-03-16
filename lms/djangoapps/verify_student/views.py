@@ -31,6 +31,8 @@ from openedx.core.djangoapps.user_api.accounts.api import get_account_settings, 
 from openedx.core.djangoapps.user_api.accounts import NAME_MIN_LENGTH
 from openedx.core.djangoapps.user_api.api.account import AccountUserNotFound, AccountValidationError
 
+from commerce.api import EcommerceAPI
+from commerce.exceptions import ApiError
 from course_modes.models import CourseMode
 from student.models import CourseEnrollment
 from student.views import reverification_info
@@ -612,6 +614,21 @@ class PayAndVerifyView(View):
         return (has_paid, bool(is_active))
 
 
+def create_order_with_ecommerce_service(user, course_key, course_mode):     # pylint: disable=invalid-name
+    """ Create a new order using the E-Commerce API. """
+    try:
+        api = EcommerceAPI()
+        # Make an API call to create the order and retrieve the results
+        _order_number, _order_status, data = api.create_order(user, course_mode.sku)
+
+        # Pass the payment parameters directly from the API response.
+        return HttpResponse(json.dumps(data['payment_parameters']), content_type="application/json")
+    except ApiError:
+        params = {'username': user.username, 'mode': course_mode.slug, 'course_id': unicode(course_key)}
+        log.error('Failed to create order for %(username)s %(mode)s mode of %(course_id)s', params)
+        raise
+
+
 @require_POST
 @login_required
 def create_order(request):
@@ -675,6 +692,9 @@ def create_order(request):
 
     if amount < current_mode.min_price:
         return HttpResponseBadRequest(_("No selected price or selected price is below minimum."))
+
+    if settings.FEATURES.get('CREATE_ORDERS_WITH_ECOMMERCE_SERVICE', False) and current_mode.sku is not None:
+        return create_order_with_ecommerce_service(request.user, course_id, current_mode)
 
     # I know, we should check this is valid. All kinds of stuff missing here
     cart = Order.get_cart_for_user(request.user)
