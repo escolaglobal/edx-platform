@@ -150,17 +150,13 @@ def _count_pylint_violations(report_file):
     return num_violations_report
 
 
-@task
-@needs('pavelib.prereqs.install_python_prereqs')
-@cmdopts([
-    ("system=", "s", "System to act on"),
-])
-def run_pep8(options):
+def _get_pep8_violations():
     """
-    Run pep8 on system code.
-    Fail the task if any violations are found.
+    Runs pep8. Returns a tuple of (number_of_violations, violations_string)
+    where violations_string is a string of all pep8 violations found, separated
+    by new lines.
     """
-    systems = getattr(options, 'system', ALL_SYSTEMS).split(',')
+    systems = ALL_SYSTEMS.split(',')
 
     report_dir = (Env.REPORT_DIR / 'pep8')
     report_dir.rmtree(ignore_errors=True)
@@ -176,13 +172,27 @@ def run_pep8(options):
         "{report_dir}/pep8.report".format(report_dir=report_dir)
     )
 
+    with open("{report_dir}/pep8.report".format(report_dir=report_dir), 'r') as f:
+        violations_list = f.readlines()
+    return (count, violations_list)
+
+
+@task
+@needs('pavelib.prereqs.install_python_prereqs')
+@cmdopts([
+    ("system=", "s", "System to act on"),
+])
+def run_pep8(options):
+    """
+    Run pep8 on system code.
+    Fail the task if any violations are found.
+    """
+    (count, violations_list) = _get_pep8_violations()
+    violations_str = ''.join(violations_list)
+
     # Print number of violations to log
     violations_count_str = "Number of pep8 violations: {count}".format(count=count)
     print(violations_count_str)
-    violations = ''
-    with open("{report_dir}/pep8.report".format(report_dir=report_dir), 'r') as f:
-        violations_list = f.readlines()
-        violations_str = '\n'.join(violations_list)
     print(violations_str)
 
     # Also write the number of violations to a file
@@ -263,21 +273,48 @@ def run_quality(options):
     pep8_files = get_violations_reports("pep8")
     pep8_reports = u' '.join(pep8_files)
 
-    try:
-        sh(
-            "diff-quality --violations=pep8 {pep8_reports} {percentage_string} "
-            "{compare_branch_string} --html-report {dquality_dir}/diff_quality_pep8.html".format(
-                pep8_reports=pep8_reports,
-                percentage_string=percentage_string,
-                compare_branch_string=compare_branch_string,
-                dquality_dir=dquality_dir
+    def _pep8_output(count, violations_list, is_html=False):
+
+        if is_html:
+            lines = ['<body>\n']
+            sep = '-------------<br/>\n'
+            title = "<h1>Quality Report: pep8</h1>\n"
+            violations_bullets = ''.join(
+                ['<li>{violation}</li><br/>\n'.format(violation=violation) for violation in violations_list]
             )
-        )
-    except BuildFailure, error_message:
-        if is_percentage_failure(error_message):
-            diff_quality_percentage_failure = True
+            violations_str = '<ul>\n{bullets}</ul>\n'.format(bullets=violations_bullets)
+            violations_count_str = "<b>Violations</b>: {count}<br/>\n"
+            fail_line = "<b>FAILURE</b>: pep8 count should be 0<br/>\n"
         else:
-            raise BuildFailure(error_message)
+            lines = []
+            sep = '-------------\n'
+            title = "Quality Report: pep8\n"
+            violations_str = ''.join(violations_list)
+            violations_count_str = "Violations: {count}\n"
+            fail_line = "FAILURE: pep8 count should be 0\n"
+
+        violations_count_str = violations_count_str.format(count=count)
+
+        lines = [sep, title, sep, violations_str, sep, violations_count_str]
+
+        if count > 0:
+            lines.append(fail_line)
+        lines.append(sep + '\n')
+        if is_html:
+            lines.append('</body>')
+
+        return ''.join(lines)
+
+    (count, violations_list) = _get_pep8_violations()
+    # Print number of violations to log
+    print _pep8_output(count, violations_list)
+
+    # Also write the number of violations to a file
+    with open(dquality_dir / "diff_quality_pep8.html", "w") as f:
+        f.write(_pep8_output(count, violations_list, is_html=True))
+
+    if count > 0:
+        diff_quality_percentage_failure = True
 
     # Generate diff-quality html report for pylint, and print to console
     # If pylint reports exist, use those
