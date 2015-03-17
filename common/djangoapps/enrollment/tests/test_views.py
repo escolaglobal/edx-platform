@@ -12,6 +12,7 @@ from rest_framework import status
 from django.conf import settings
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory
+from course_modes.models import CourseMode
 from util.testing import UrlResetMixin
 from enrollment import api
 from enrollment.errors import CourseEnrollmentError
@@ -45,12 +46,12 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
     @ddt.data(
         # Default (no course modes in the database)
         # Expect that users are automatically enrolled as "honor".
-        ([], 'honor'),
+        ([], CourseMode.HONOR),
 
         # Audit / Verified / Honor
         # We should always go to the "choose your course" page.
         # We should also be enrolled as "honor" by default.
-        (['honor', 'verified', 'audit'], 'honor'),
+        ([CourseMode.HONOR, CourseMode.VERIFIED, CourseMode.AUDIT], CourseMode.HONOR),
     )
     @ddt.unpack
     def test_enroll(self, course_modes, enrollment_mode):
@@ -73,8 +74,8 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
     def test_check_enrollment(self):
         CourseModeFactory.create(
             course_id=self.course.id,
-            mode_slug='honor',
-            mode_display_name='Honor',
+            mode_slug=CourseMode.HONOR,
+            mode_display_name=CourseMode.HONOR,
         )
         # Create an enrollment
         self._create_enrollment()
@@ -84,7 +85,7 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = json.loads(resp.content)
         self.assertEqual(unicode(self.course.id), data['course_details']['course_id'])
-        self.assertEqual('honor', data['mode'])
+        self.assertEqual(CourseMode.HONOR, data['mode'])
         self.assertTrue(data['is_active'])
 
     @ddt.data(
@@ -132,8 +133,8 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
     def test_user_not_specified(self):
         CourseModeFactory.create(
             course_id=self.course.id,
-            mode_slug='honor',
-            mode_display_name='Honor',
+            mode_slug=CourseMode.HONOR,
+            mode_display_name=CourseMode.HONOR,
         )
         # Create an enrollment
         self._create_enrollment()
@@ -143,7 +144,7 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = json.loads(resp.content)
         self.assertEqual(unicode(self.course.id), data['course_details']['course_id'])
-        self.assertEqual('honor', data['mode'])
+        self.assertEqual(CourseMode.HONOR, data['mode'])
         self.assertTrue(data['is_active'])
 
     def test_user_not_authenticated(self):
@@ -180,8 +181,8 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
         # Try to enroll a user that is not the authenticated user.
         CourseModeFactory.create(
             course_id=self.course.id,
-            mode_slug='honor',
-            mode_display_name='Honor',
+            mode_slug=CourseMode.HONOR,
+            mode_display_name=CourseMode.HONOR,
         )
         self._create_enrollment(username=self.other_user.username, expected_status=status.HTTP_404_NOT_FOUND)
         # Verify that the server still has access to this endpoint.
@@ -191,8 +192,8 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
     def test_user_does_not_match_param_for_list(self):
         CourseModeFactory.create(
             course_id=self.course.id,
-            mode_slug='honor',
-            mode_display_name='Honor',
+            mode_slug=CourseMode.HONOR,
+            mode_display_name=CourseMode.HONOR,
         )
         resp = self.client.get(reverse('courseenrollments'), {"user": self.other_user.username})
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
@@ -206,8 +207,8 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
     def test_user_does_not_match_param(self):
         CourseModeFactory.create(
             course_id=self.course.id,
-            mode_slug='honor',
-            mode_display_name='Honor',
+            mode_slug=CourseMode.HONOR,
+            mode_display_name=CourseMode.HONOR,
         )
         resp = self.client.get(
             reverse('courseenrollment', kwargs={"user": self.other_user.username, "course_id": unicode(self.course.id)})
@@ -224,8 +225,8 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
     def test_get_course_details(self):
         CourseModeFactory.create(
             course_id=self.course.id,
-            mode_slug='honor',
-            mode_display_name='Honor',
+            mode_slug=CourseMode.HONOR,
+            mode_display_name=CourseMode.HONOR,
             sku='123',
         )
         resp = self.client.get(
@@ -236,9 +237,9 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
         data = json.loads(resp.content)
         self.assertEqual(unicode(self.course.id), data['course_id'])
         mode = data['course_modes'][0]
-        self.assertEqual(mode['slug'], 'honor')
+        self.assertEqual(mode['slug'], CourseMode.HONOR)
         self.assertEqual(mode['sku'], '123')
-        self.assertEqual(mode['name'], 'Honor')
+        self.assertEqual(mode['name'], CourseMode.HONOR)
 
     def test_with_invalid_course_id(self):
         self._create_enrollment(course_id='entirely/fake/course', expected_status=status.HTTP_400_BAD_REQUEST)
@@ -259,7 +260,7 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
 
     def test_enrollment_already_enrolled(self):
         response = self._create_enrollment()
-        repeat_response = self._create_enrollment()
+        repeat_response = self._create_enrollment(expected_status=status.HTTP_200_OK)
         self.assertEqual(json.loads(response.content), json.loads(repeat_response.content))
 
     def test_get_enrollment_with_invalid_key(self):
@@ -296,7 +297,7 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
     def test_update_enrollment_with_mode(self):
         """With the right API key, update an existing enrollment with a new mode. """
         # Create an honor and verified mode for a course. This allows an update.
-        for mode in ['honor', 'verified']:
+        for mode in [CourseMode.HONOR, CourseMode.VERIFIED]:
             CourseModeFactory.create(
                 course_id=self.course.id,
                 mode_slug=mode,
@@ -310,18 +311,43 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
         self.assertTrue(CourseEnrollment.is_enrolled(self.user, self.course.id))
         course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
         self.assertTrue(is_active)
-        self.assertEqual(course_mode, 'honor')
+        self.assertEqual(course_mode, CourseMode.HONOR)
 
         # Check that the enrollment upgraded to verified.
-        self._create_enrollment(as_server=True, mode='verified')
+        self._create_enrollment(as_server=True, mode=CourseMode.VERIFIED, expected_status=status.HTTP_200_OK)
         course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
         self.assertTrue(is_active)
-        self.assertEqual(course_mode, 'verified')
+        self.assertEqual(course_mode, CourseMode.VERIFIED)
+
+    def test_downgrade_enrollment_with_mode(self):
+        """With the right API key, downgrade an existing enrollment with a new mode. """
+        # Create an honor and verified mode for a course. This allows an update.
+        for mode in [CourseMode.HONOR, CourseMode.VERIFIED]:
+            CourseModeFactory.create(
+                course_id=self.course.id,
+                mode_slug=mode,
+                mode_display_name=mode,
+            )
+
+        # Create an enrollment
+        self._create_enrollment(as_server=True, mode=CourseMode.VERIFIED)
+
+        # Check that the enrollment is honor.
+        self.assertTrue(CourseEnrollment.is_enrolled(self.user, self.course.id))
+        course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
+        self.assertTrue(is_active)
+        self.assertEqual(course_mode, CourseMode.VERIFIED)
+
+        # Check that the enrollment upgraded to verified.
+        self._create_enrollment(as_server=True, mode=CourseMode.HONOR, expected_status=status.HTTP_200_OK)
+        course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
+        self.assertTrue(is_active)
+        self.assertEqual(course_mode, CourseMode.HONOR)
 
     def test_change_mode_from_user(self):
         """Users should not be able to alter the enrollment mode on an enrollment. """
         # Create an honor and verified mode for a course. This allows an update.
-        for mode in ['honor', 'verified']:
+        for mode in [CourseMode.HONOR, CourseMode.VERIFIED]:
             CourseModeFactory.create(
                 course_id=self.course.id,
                 mode_slug=mode,
@@ -335,22 +361,22 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
         self.assertTrue(CourseEnrollment.is_enrolled(self.user, self.course.id))
         course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
         self.assertTrue(is_active)
-        self.assertEqual(course_mode, 'honor')
+        self.assertEqual(course_mode, CourseMode.HONOR)
 
         # Get a 403 response when trying to upgrade yourself.
-        self._create_enrollment(mode='verified', expected_status=status.HTTP_403_FORBIDDEN)
+        self._create_enrollment(mode=CourseMode.VERIFIED, expected_status=status.HTTP_403_FORBIDDEN)
         course_mode, is_active = CourseEnrollment.enrollment_mode_for_user(self.user, self.course.id)
         self.assertTrue(is_active)
-        self.assertEqual(course_mode, 'honor')
+        self.assertEqual(course_mode, CourseMode.HONOR)
 
     def _create_enrollment(
             self,
             course_id=None,
             username=None,
-            expected_status=status.HTTP_200_OK,
+            expected_status=status.HTTP_201_CREATED,
             email_opt_in=None,
             as_server=False,
-            mode='honor',
+            mode=CourseMode.HONOR,
     ):
         """Enroll in the course and verify the URL we are sent to. """
         course_id = unicode(self.course.id) if course_id is None else course_id
@@ -372,7 +398,7 @@ class EnrollmentTest(ModuleStoreTestCase, APITestCase):
 
         self.assertEqual(resp.status_code, expected_status)
 
-        if expected_status == status.HTTP_200_OK:
+        if expected_status in [status.HTTP_201_CREATED, status.HTTP_200_OK]:
             data = json.loads(resp.content)
             self.assertEqual(course_id, data['course_details']['course_id'])
             self.assertEqual(mode, data['mode'])
@@ -431,7 +457,7 @@ class EnrollmentEmbargoTest(UrlResetMixin, ModuleStoreTestCase):
         })
 
         response = self.client.post(url, data, content_type='application/json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Verify that we were enrolled
         self.assertEqual(len(self._get_enrollments()), 1)
