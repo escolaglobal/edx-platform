@@ -648,7 +648,6 @@ class XModule(XModuleMixin, HTMLSnippet, XBlock):  # pylint: disable=abstract-me
         self._runtime = None
         super(XModule, self).__init__(*args, **kwargs)
         self.runtime.xmodule_instance = self
-        self._runtime = None
 
     @property
     def runtime(self):
