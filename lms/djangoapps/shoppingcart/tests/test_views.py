@@ -1,6 +1,7 @@
 """
 Tests for Shopping Cart views
 """
+from collections import OrderedDict
 import pytz
 from urlparse import urlparse
 from decimal import Decimal
@@ -46,6 +47,7 @@ from shoppingcart.processors import render_purchase_form_html
 from shoppingcart.admin import SoftDeleteCouponAdmin
 from shoppingcart.views import initialize_report
 from shoppingcart.tests.payment_fake import PaymentFakeView
+from shoppingcart.processors.CyberSource2 import sign
 
 
 def mock_render_purchase_form_html(*args, **kwargs):
@@ -1253,40 +1255,59 @@ class ShoppingCartViewsTests(ModuleStoreTestCase):
         self._assert_404(reverse('shoppingcart.views.billing_details', args=[]))
 
     def test_upgrade_postpay_callback_emits_ga_event(self):
-        # Create other carts first
+        # Enroll as honor in the course with the current user.
 
-        Order.get_cart_for_user(self.user).start_purchase()
+        CourseEnrollment.enroll(self.user, self.course_key)
+
+        # add verified mode
+        CourseMode.objects.create(
+            course_id=self.verified_course_key,
+            mode_slug="verified",
+            mode_display_name="verified cert",
+            min_price=self.cost
+        )
+
         # Purchase a verified certificate
         self.cart = Order.get_cart_for_user(self.user)
-        CertificateItem.add_to_order(self.cart, self.verified_course_key, self.cost, 'honor')
+        CertificateItem.add_to_order(self.cart, self.verified_course_key, self.cost, 'verified')
         self.cart.start_purchase()
 
         self.login_user()
         # setting the attempting upgrade session value.
-        s = self.client.session
-        s['attempting_upgrade'] = True
-        s.save()
+        session = self.client.session
+        session['attempting_upgrade'] = True
+        session.save()
 
-        # Simulate hitting the post-pay callback
-        with patch('shoppingcart.views.process_postpay_callback') as mock_process:
-            mock_process.return_value = {'success': True, 'order': self.cart}
-            url = reverse('shoppingcart.views.postpay_callback')
+        ordered_params = OrderedDict([
+            ('amount', self.cost),
+            ('currency', 'usd'),
+            ('transaction_type', 'sale'),
+            ('orderNumber', str(self.cart.id)),
+            ('access_key', '123456789'),
+            ('merchantID', 'edx'),
+            ('djch', '012345678912'),
+            ('orderPage_version', 2),
+            ('orderPage_serialNumber', '1234567890'),
+            ('profile_id', "00000001"),
+            ('reference_number', str(self.cart.id)),
+            ('locale', 'en'),
+            ('signed_date_time', '2014-08-18T13:59:31Z'),
+        ])
 
-            self.assertTrue(self.client.session.get('attempting_upgrade'))
-            __ = self.client.post(url, follow=True)
-            self.assertFalse(self.client.session.get('attempting_upgrade'))
+        resp_params = PaymentFakeView.response_post_params(sign(ordered_params))
+        self.assertTrue(self.client.session.get('attempting_upgrade'))
+        url = reverse('shoppingcart.views.postpay_callback')
+        self.client.post(url, resp_params, follow=True)
+        self.assertFalse(self.client.session.get('attempting_upgrade'))
 
-            course_enrollment = CourseEnrollment.get_or_create_enrollment(self.user, self.course_key)
-            course_enrollment.emit_event('edx.course.enrollment.upgrade.succeeded')
-
-            self.mock_tracker.emit.assert_any_call(  # pylint: disable=maybe-no-member
-                'edx.course.enrollment.upgrade.succeeded',
-                {
-                    'user_id': course_enrollment.user.id,
-                    'course_id': course_enrollment.course_id.to_deprecated_string(),
-                    'mode': course_enrollment.mode
-                }
-            )
+        self.mock_tracker.emit.assert_any_call(  # pylint: disable=maybe-no-member
+            'edx.course.enrollment.upgrade.succeeded',
+            {
+                'user_id': self.user.id,
+                'course_id': self.verified_course_key.to_deprecated_string(),
+                'mode': 'verified'
+            }
+        )
 
 
 class ReceiptRedirectTest(ModuleStoreTestCase):
