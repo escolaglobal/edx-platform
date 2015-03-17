@@ -570,7 +570,11 @@ def upload_grades_csv(_xmodule_instance_args, _entry_id, course_id, _task_input,
 
     fmt = u'Task: {task_id}, InstructorTask ID: {entry_id}, Course: {course_id}, Input: {task_input}'
     task_info_string = fmt.format(
-        task_id=_xmodule_instance_args.get('task_id'), entry_id=_entry_id, course_id=course_id, task_input=_task_input)
+        task_id=_xmodule_instance_args.get('task_id'),
+        entry_id=_entry_id,
+        course_id=course_id,
+        task_input=_task_input
+    )
     TASK_LOG.info(u'%s, Task type: %s, Starting task execution', task_info_string, action_name)
 
     course = get_course_by_id(course_id)
@@ -587,8 +591,13 @@ def upload_grades_csv(_xmodule_instance_args, _entry_id, course_id, _task_input,
 
     total_enrolled_students = enrolled_students.count()
     student_counter = 0
-    TASK_LOG.info(u'%s, Task type: %s, Current step: %s, Starting grade calculation for total students: %s',
-                  task_info_string, action_name, current_step, total_enrolled_students)
+    TASK_LOG.info(
+        u'%s, Task type: %s, Current step: %s, Starting grade calculation for total students: %s',
+        task_info_string,
+        action_name,
+        current_step,
+        total_enrolled_students
+    )
     for student, gradeset, err_msg in iterate_grades_for(course_id, enrolled_students):
         # Periodically update task status (this is a cache write)
         if task_progress.attempted % status_interval == 0:
@@ -598,8 +607,14 @@ def upload_grades_csv(_xmodule_instance_args, _entry_id, course_id, _task_input,
         # Now add a log entry after certain intervals to get a hint that task is in progress
         student_counter += 1
         if student_counter % 1000 == 0:
-            TASK_LOG.info(u'%s, Task type: %s, Current step: %s, Grade calculation in-progress for students: %s/%s',
-                          task_info_string, action_name, current_step, student_counter, total_enrolled_students)
+            TASK_LOG.info(
+                u'%s, Task type: %s, Current step: %s, Grade calculation in-progress for students: %s/%s',
+                task_info_string,
+                action_name,
+                current_step,
+                student_counter,
+                total_enrolled_students
+            )
 
         if gradeset:
             # We were able to successfully grade this student for this course.
@@ -642,8 +657,14 @@ def upload_grades_csv(_xmodule_instance_args, _entry_id, course_id, _task_input,
             task_progress.failed += 1
             err_rows.append([student.id, student.username, err_msg])
 
-    TASK_LOG.info(u'%s, Task type: %s, Current step: %s, Grade calculation completed for students: %s/%s',
-                  task_info_string, action_name, current_step, student_counter, total_enrolled_students)
+    TASK_LOG.info(
+        u'%s, Task type: %s, Current step: %s, Grade calculation completed for students: %s/%s',
+        task_info_string,
+        action_name,
+        current_step,
+        student_counter,
+        total_enrolled_students
+    )
 
     # By this point, we've got the rows we're going to stuff into our CSV files.
     current_step = {'step': 'Uploading CSVs'}
