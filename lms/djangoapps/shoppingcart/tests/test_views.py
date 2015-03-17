@@ -1172,7 +1172,7 @@ class ShoppingCartViewsTests(ModuleStoreTestCase):
         self.assertFalse(context['reg_code_info_list'][1]['is_redeemed'])
 
     @patch('shoppingcart.views.render_to_response', render_mock)
-    def test_show_receipt_success(self):
+    def test_show_receipt_success_with_upgrade(self):
 
         reg_item = PaidCourseRegistration.add_to_order(self.cart, self.course_key)
         cert_item = CertificateItem.add_to_order(self.cart, self.verified_course_key, self.cost, 'honor')
