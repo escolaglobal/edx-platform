@@ -9234,7 +9234,7 @@ msgstr "Mais opções no menu suspenso"
 
 #: lms/templates/navigation-edx.html lms/templates/navigation.html
 msgid "Sign out"
-msgstr ""
+msgstr "sair"
 
 #: lms/templates/navigation-edx.html lms/templates/navigation.html
 msgid "Shopping Cart"
