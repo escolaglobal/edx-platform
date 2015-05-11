@@ -9377,7 +9377,6 @@ msgid "More options dropdown"
 msgstr "Mais opções no menu suspenso"
 
 #: lms/templates/navigation-edx.html lms/templates/navigation.html
-<<<<<<< HEAD
 #: lms/templates/student_account/account_settings.html
 msgid "Account Settings"
 msgstr ""
@@ -9385,10 +9384,6 @@ msgstr ""
 #: lms/templates/navigation-edx.html lms/templates/navigation.html
 msgid "My Profile"
 msgstr ""
-=======
-msgid "Sign out"
-msgstr "sair"
->>>>>>> 92fa174c0855537af5d2815de6b0ed573f7b2200
 
 #: lms/templates/navigation-edx.html lms/templates/navigation.html
 msgid "Shopping Cart"
@@ -18667,13 +18662,6 @@ msgstr ""
 msgid "Currently signed in as:"
 msgstr ""
 
-<<<<<<< HEAD
-=======
-#: cms/templates/widgets/header.html
-msgid "Sign Out"
-msgstr "Sair"
-
->>>>>>> 92fa174c0855537af5d2815de6b0ed573f7b2200
 #: cms/templates/widgets/metadata-edit.html
 msgid "Launch Latex Source Compiler"
 msgstr ""

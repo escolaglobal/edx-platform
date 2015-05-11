@@ -34,42 +34,10 @@
             </ul>
         </div>
         <textarea class="markdown-box">${markdown | h}</textarea>
-        %else:
-        <div class="custom-area" style="text-align: right">
-            coding@escolablobal: <span id="pythonExercise"><a>Python exercise code generation</a></span> <span id="blocklyExercise"><a>Blockly exercise code generation</a> </span>
-            <div id="AmazingEditor" style="display:none; position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999; background-color:white;">
-                <div id="close-editor-iframe"><a>Generate Code</a> </div>
-                <div style="text-align: center"> Loading... </div>            
-            </div>
-        </div>
         %endif
         <textarea class="xml-box" rows="8" cols="40">${data | h}</textarea>
     </div>
 </section>
-
-<script type="text/javascript">
-$( document ).ready(function() {
-    $("#pythonExercise").click(function () {
-        //$("#AmazingEditor").toogle();
-        window.codemirrorobject.setValue("I am amazing");
-    });
-    $("#blocklyExercise").click(function () {
-        $("#AmazingEditor").append("<iframe  id=\"editor-iframe\" src=\"http://bittencookie.github.io/index.html\" style=\" position:relative; top:-20px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;\">  Your browser doesn't support IFrames</iframe>");
-        var problem_url = $(".xblock-editor").attr("data-locator").split("/");
-        var problem_name = problem_url[problem_url.length - 1];
-        console.log(" " + problem_name);
-        $("#AmazingEditor").show();
-        
-        //alert("Go");
-    });
-    $("#close-editor-iframe").click(function(){
-        window.codemirrorobject.setValue("I am amazing");
-        //$("#editor-iframe").contents();
-        $("#AmazingEditor").hide();
-        $("#editor-iframe").remove();
-    });
-});
-</script>
 
 <script type="text/template" id="simple-editor-cheatsheet">
     <article class="simple-editor-cheatsheet">

@@ -96,7 +96,7 @@ clone_repos() {
                 output "Creating backup for existing edx platform"
                 mv "$BASE/edx-platform" "${BASE}/edx-platform.bak.$$"
             fi
-            git clone https://github.com/luiscleto/edx-platform.git
+            git clone https://github.com/edx/edx-platform.git
         fi
     fi
 }

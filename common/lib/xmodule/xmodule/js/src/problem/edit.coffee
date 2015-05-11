@@ -1,5 +1,3 @@
-root = exports ? this
-
 class @MarkdownEditingDescriptor extends XModule.Descriptor
   # TODO really, these templates should come from or also feed the cheatsheet
   @multipleChoiceTemplate : "( ) #{gettext 'incorrect'}\n( ) #{gettext 'incorrect'}\n(x) #{gettext 'correct'}\n"
@@ -46,7 +44,6 @@ class @MarkdownEditingDescriptor extends XModule.Descriptor
     $(@xml_editor.getWrapperElement()).toggleClass("CodeMirror-advanced");
     # Need to refresh to get line numbers to display properly.
     @xml_editor.refresh()
-    root.codemirrorobject = @xml_editor
 
   ###
   User has clicked to show the XML editor. Before XML editor is swapped in,

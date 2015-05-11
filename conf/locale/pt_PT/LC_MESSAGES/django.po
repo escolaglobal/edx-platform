@@ -83,12 +83,12 @@ msgstr ""
 #. needs to grade
 #: cms/djangoapps/contentstore/utils.py common/lib/xmodule/xmodule/tabs.py
 msgid "Open Ended Panel"
-msgstr "Painel de Problemas de Resposta Aberta"
+msgstr ""
 
 #: cms/djangoapps/contentstore/utils.py common/lib/xmodule/xmodule/tabs.py
 #: lms/templates/edxnotes/edxnotes.html
 msgid "Notes"
-msgstr "Notas"
+msgstr ""
 
 #. #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
 #. Translators: "Discussion" is the title of the course forum page
@@ -100,19 +100,19 @@ msgstr "Notas"
 #: common/lib/xmodule/xmodule/tabs.py
 #: lms/templates/discussion/_underscore_templates.html
 msgid "Discussion"
-msgstr "Discussão"
+msgstr ""
 
 #: cms/djangoapps/contentstore/views/component.py
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 #: lms/templates/courseware/legacy_instructor_dashboard.html
 #: lms/templates/instructor/instructor_dashboard_2/instructor_analytics.html
 msgid "Problem"
-msgstr "Prolema"
+msgstr ""
 
 #: cms/djangoapps/contentstore/views/component.py
 #: common/lib/xmodule/xmodule/video_module/video_module.py
 msgid "Advanced"
-msgstr "Avançado"
+msgstr ""
 
 #: cms/djangoapps/contentstore/views/entrance_exam.py
 #: lms/djangoapps/courseware/tabs.py cms/templates/settings.html
@@ -125,19 +125,19 @@ msgstr ""
 #: lms/templates/ccx/schedule.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Section"
-msgstr "Secção"
+msgstr ""
 
 #: cms/djangoapps/contentstore/views/helpers.py
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 #: lms/templates/ccx/schedule.html
 msgid "Subsection"
-msgstr "Subsecção"
+msgstr ""
 
 #: cms/djangoapps/contentstore/views/helpers.py
 #: lms/djangoapps/instructor/views/tools.py lms/templates/seq_module.html
 #: lms/templates/ccx/schedule.html
 msgid "Unit"
-msgstr "Unidade"
+msgstr ""
 
 #: cms/djangoapps/contentstore/views/videos.py
 #: lms/djangoapps/class_dashboard/dashboard_data.py
@@ -148,7 +148,7 @@ msgstr "Unidade"
 #: lms/templates/shoppingcart/billing_details.html
 #: lms/templates/shoppingcart/receipt.html
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #: cms/djangoapps/contentstore/views/videos.py
 #: common/lib/xmodule/xmodule/video_module/video_xfields.py
@@ -160,7 +160,7 @@ msgstr ""
 #: lms/templates/open_ended_problems/open_ended_problems.html
 #: lms/templates/shoppingcart/receipt.html
 msgid "Status"
-msgstr "Estado"
+msgstr ""
 
 #: common/djangoapps/cors_csrf/models.py
 msgid ""
@@ -170,109 +170,109 @@ msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "Honor Code Certificate"
-msgstr "Certificado de Código de Honra"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "Your verification is pending"
-msgstr "A tua verificação está pendente"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "Verified: Pending Verification"
-msgstr "Verificado: Verificação Pendente"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "ID verification pending"
-msgstr "Verificação de ID pendente"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "You're enrolled as a verified student"
-msgstr "Estás inscrito como estudante verificado"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 #: lms/templates/instructor/instructor_dashboard_2/course_info.html
 msgid "Verified"
-msgstr "Verificado"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 #: lms/templates/dashboard/_dashboard_course_listing.html
 msgid "ID Verified Ribbon/Badge"
-msgstr "Medalha Verificada por ID"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "You're enrolled as an honor code student"
-msgstr "Estás inscrito como estudante de código de honra"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 #: openedx/core/djangoapps/user_api/views.py
 #: lms/templates/static_templates/honor.html
 msgid "Honor Code"
-msgstr "Código de Honra"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "You're auditing this course"
-msgstr "Estás a auditorar este curso"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "Auditing"
-msgstr "Auditoria"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "You're enrolled as a professional education student"
-msgstr "Estás inscrito como estudante de educação profissional"
+msgstr ""
 
 #: common/djangoapps/course_modes/models.py
 msgid "Professional Ed"
-msgstr "Educação Profissional"
+msgstr ""
 
 #: common/djangoapps/course_modes/views.py
 msgid "Enrollment is closed"
-msgstr "Inscrições encerradas"
+msgstr ""
 
 #: common/djangoapps/course_modes/views.py
 msgid "Enrollment mode not supported"
-msgstr "Modo de inscrição não suportado"
+msgstr ""
 
 #: common/djangoapps/course_modes/views.py
 msgid "Invalid amount selected."
-msgstr "Quantia selecionada inválida."
+msgstr ""
 
 #: common/djangoapps/course_modes/views.py
 msgid "No selected price or selected price is too low."
-msgstr "Nenhum preço foi selecionado ou o preço selecionado é muito baixo."
+msgstr ""
 
 #: common/djangoapps/django_comment_common/models.py
 msgid "Administrator"
-msgstr "Administrador"
+msgstr ""
 
 #: common/djangoapps/django_comment_common/models.py
 msgid "Moderator"
-msgstr "Moderador"
+msgstr ""
 
 #: common/djangoapps/django_comment_common/models.py
 #: lms/templates/discussion/_underscore_templates.html
 msgid "Community TA"
-msgstr "Assistente de ensino da comunidade"
+msgstr ""
 
 #: common/djangoapps/django_comment_common/models.py
 #: lms/templates/courseware/course_navigation.html
 msgid "Student"
-msgstr "Estudante"
+msgstr ""
 
 #: common/djangoapps/embargo/forms.py
 msgid "COURSE NOT FOUND.  Please check that the course ID is valid."
-msgstr "CURSO NÃO ENCONTRADO. Por favor verifica que o ID do curso é válido."
+msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid "The course key for the restricted course."
-msgstr "A chave do curso para o curso restringido."
+msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid "The message to show when a user is blocked from enrollment."
-msgstr "A mensagem a mostrar quando um utilizador é bloqueado de se inscrever."
+msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid "The message to show when a user is blocked from accessing a course."
-msgstr "A mensagem a mostrar quando um utilizador é bloqueado de aceder a um curso."
+msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid ""
@@ -282,7 +282,7 @@ msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid "Two character ISO country code."
-msgstr "Código ISO de dois caracteres do país."
+msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid ""
@@ -291,188 +291,175 @@ msgid ""
 " the course.  If blacklist countries are specified, then users from "
 "blacklisted countries will NOT be able to access the course."
 msgstr ""
-"Se se deve incluir ou excluir o curso dado. Se forem especificados países "
-"autorizados, então APENAS utilizadores dos países autorizados poderão aceder"
-" ao curso.  Se forem especificados países bloqueados, então utilizadores "
-"dos países bloqueados NÃO vão poder aceder ao curso."
 
 #: common/djangoapps/embargo/models.py
 msgid "The course to which this rule applies."
-msgstr "O curso ao qual esta regra se aplica."
+msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid "The country to which this rule applies."
-msgstr "O país ao qual esta regra se aplica."
+msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid "Whitelist {country} for {course}"
-msgstr "Autorizar {country} para {course}"
+msgstr ""
 
 #: common/djangoapps/embargo/models.py
 msgid "Blacklist {country} for {course}"
-msgstr "Bloquear {country} para {curso}"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Username must be minimum of two characters long"
-msgstr "Nome do utilizador deve ter pelo menos 2 caracteres"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "A properly formatted e-mail is required"
-msgstr "É necessário um endereço de e-mail válido"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "A valid password is required"
-msgstr "É necessário uma palavra-chave válida"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Your legal name must be a minimum of two characters long"
-msgstr "O teu nome legal deve ter pelo menos dois caracteres"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Username should only consist of A-Z and 0-9, with no spaces."
-msgstr "O nome de utilizador deve conter apenas letras e números, sem espaços."
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Username cannot be more than %(limit_value)s characters long"
-msgstr "O nome de utilizador não deve ter mais do que %(limit_value)s caracteres"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Email cannot be more than %(limit_value)s characters long"
-msgstr "O endereço de e-mail não deve ter mais do que %(limit_value)s caracteres"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "You must accept the terms of service."
-msgstr "Por favor aceita os termos de serviço."
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "A level of education is required"
-msgstr "Por favor indica o nível de educação"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Your gender is required"
-msgstr "Por favor indica o teu género"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Your year of birth is required"
-msgstr "Por favor indica o teu ano de nascimento"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Your mailing address is required"
-msgstr "Por favor indica o teu endereço de e-mail"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "A description of your goals is required"
-msgstr "Por favor descreve os teus objetivos"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "A city is required"
-msgstr "Por favor indica uma cidade"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "A country is required"
-msgstr "Por favor indica um país"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "To enroll, you must follow the honor code."
-msgstr "Para te inscreveres, tens de seguir o código de honra."
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "You are missing one or more required fields"
-msgstr "Falta um ou mais dos campos obrigatórios"
+msgstr ""
 
 #: common/djangoapps/student/forms.py
 msgid "Username and password fields cannot match"
-msgstr "Nome de utilizador e palavra-chave não podem ser iguais"
+msgstr ""
 
 #: common/djangoapps/student/forms.py common/djangoapps/student/views.py
 msgid "Password: "
-msgstr "Palavra-chave: "
+msgstr ""
 
 #: common/djangoapps/student/middleware.py
 msgid ""
 "Your account has been disabled. If you believe this was done in error, "
 "please contact us at {support_email}"
 msgstr ""
-"A tua conta foi desativada. Se achas que isto aconteceu por engano, "
-"por favor contacta-nos em {support_email}"
 
 #: common/djangoapps/student/middleware.py
 msgid "Disabled Account"
-msgstr "Conta Desativada"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "Male"
-msgstr "Masculino"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "Female"
-msgstr "Feminino"
+msgstr ""
 
 #. Translators: 'Other' refers to the student's gender
 #. Translators: 'Other' refers to the student's level of education
 #: common/djangoapps/student/models.py
 msgid "Other"
-msgstr "Outro"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "Doctorate"
-msgstr "Doutoramento"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "Master's or professional degree"
-msgstr "Mestrado ou especialização"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "Bachelor's degree"
-msgstr "Licenciatura"
+msgstr ""
 
 #: common/djangoapps/student/models.py
-<<<<<<< HEAD
 msgid "Associate degree"
 msgstr ""
-=======
-msgid "Associate's degree"
-msgstr "Curso profissional"
->>>>>>> 92fa174c0855537af5d2815de6b0ed573f7b2200
 
 #: common/djangoapps/student/models.py
 msgid "Secondary/high school"
-msgstr "Ensino secundário"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "Junior secondary/junior high/middle school"
-msgstr "Ensino básico"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "Elementary/primary school"
-msgstr "Escola primária"
+msgstr ""
 
 #. #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
 #. Translators: 'None' refers to the student's level of education
 #: common/djangoapps/student/models.py
 #: common/lib/xmodule/xmodule/course_module.py cms/templates/settings.html
 msgid "None"
-msgstr "Nenhum"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "{platform_name} Honor Code Certificate for {course_name}"
-msgstr "{platform_name} Certificado de Código de Honra para {course_name}"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "{platform_name} Verified Certificate for {course_name}"
-msgstr "{platform_name} Certificado Verificado para {course_name}"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "{platform_name} Professional Certificate for {course_name}"
-msgstr "{platform_name} Certificado Profissional para {course_name}"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid ""
 "The company identifier for the LinkedIn Add-to-Profile button e.g "
 "0_0dPSPyS070e0HsE9HNz_13_d11_"
 msgstr ""
-"O identificador da empresa para o botão para adicionar ao perfil do LinkedIn e.g "
-"0_0dPSPyS070e0HsE9HNz_13_d11_"
 
 #: common/djangoapps/student/models.py
 msgid ""
@@ -480,13 +467,10 @@ msgid ""
 "(Example: 'edx')  If no value is provided, tracking codes will not be sent "
 "to LinkedIn."
 msgstr ""
-"Identificador curto para o parceiro do LinkedIn usado no código de acompanhamento.  "
-"(Exemplo: 'edx')  Se nenhum valor for fornecido, códigos de acompanhamento não serão enviados "
-"para o LinkedIn."
 
 #: common/djangoapps/student/models.py
 msgid "{platform_name} Certificate for {course_name}"
-msgstr "{platform_name} Certificado para {course_name}"
+msgstr ""
 
 #: common/djangoapps/student/models.py
 msgid "The ISO 639-1 language code for this language."
@@ -494,35 +478,33 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Course id not specified"
-msgstr "ID do curso não especificado"
+msgstr ""
 
 #: common/djangoapps/student/views.py lms/djangoapps/dashboard/support.py
 msgid "Invalid course id"
-msgstr "ID do curso inválido"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Course id is invalid"
-msgstr "O ID do curso é inválido"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Could not enroll"
-msgstr "Não foi possível realizar a inscrição"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "You are not enrolled in this course"
-msgstr "Não estás inscrito neste curso"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Enrollment action is invalid"
-msgstr "Ação de inscrição inválida"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid ""
 "You've successfully logged into your {provider_name} account, but this "
 "account isn't linked with an {platform_name} account yet."
 msgstr ""
-"Iniciaste sessão com sucesso na tua conta {provider_name}, mas esta "
-"conta ainda não está associada com uma conta {platform_name}."
 
 #: common/djangoapps/student/views.py
 msgid ""
@@ -530,29 +512,22 @@ msgid ""
 "below, and then link your {platform_name} account with {provider_name} from "
 "your dashboard."
 msgstr ""
-"Usa o teu nome de utilizador e palavra-chave da plataforma {platform_name} para iniciares sessão "
-"em baixo, depois associa a tua conta {platform_name} com o {provider_name} a partir "
-"do teu painel."
 
 #: common/djangoapps/student/views.py
 msgid ""
 "If you don't have an {platform_name} account yet, click <strong>Register "
 "Now</strong> at the top of the page."
 msgstr ""
-"Se ainda não tens uma conta {platform_name}, carrega em  <strong>Regista-te "
-" Agora</strong> no topo da página."
 
 #: common/djangoapps/student/views.py
 msgid "There was an error receiving your login information. Please email us."
-msgstr "Ocorreu um erro a receber a tua informação de início de sessão. Por favor envia-nos um email."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid ""
 "This account has been temporarily locked due to excessive login failures. "
 "Try again later."
 msgstr ""
-"Esta conta foi bloqueada temporariamente devido a demasiadas tentativas falhadas de início de sessão. "
-"Tenta outra vez mais tarde."
 
 #: common/djangoapps/student/views.py
 msgid ""
@@ -560,57 +535,52 @@ msgid ""
 "reset your password before you can log in again. Please click the \"Forgot "
 "Password\" link on this page to reset your password before logging in again."
 msgstr ""
-"A tua palavra-chave expirou devido à política de palavras-chave nesta conta. Tens de repor "
-"a tua palavra-chave antes de poderes iniciar sessão outra vez. Por favor carrega em \"Esqueceste-te "
-"da tua Palavra-chave?\" nesta página para repores a tua palavra-chave antes de iniciares sessão outra vez."
 
 #: common/djangoapps/student/views.py
 msgid "Too many failed login attempts. Try again later."
-msgstr "Demasiadas tentativas de início de sessão falhadas. Tenta outra vez mais tarde."
+msgstr ""
 
 #: common/djangoapps/student/views.py lms/templates/provider_login.html
 msgid "Email or password is incorrect."
-msgstr "Dados de início de sessão incorretos."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid ""
 "This account has not been activated. We have sent another activation "
 "message. Please check your email for the activation instructions."
 msgstr ""
-"Esta conta não foi ativada. Enviamos outra mensagem de ativação. "
-"Por favor verifica o teu email para as instruções de ativação."
 
 #: common/djangoapps/student/views.py
 msgid "Please enter a username"
-msgstr "Por favor insere um nome de utilizador"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Please choose an option"
-msgstr "Por favor escolhe uma opção"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "User with username {} does not exist"
-msgstr "Utilizador {} não existe"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Successfully disabled {}'s account"
-msgstr "Conta {} desativada com sucesso"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Successfully reenabled {}'s account"
-msgstr "Conta {} reativada com sucesso"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Unexpected account status"
-msgstr "Estado de conta inesperado"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "An account with the Public Username '{username}' already exists."
-msgstr "Já existe uma conta com o nome de utilizador '{username}'."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "An account with the Email '{email}' already exists."
-msgstr "Já existe uma conta com o email de utilizador '{email}'."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "An access_token is required when passing value ({}) for provider."
@@ -626,7 +596,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Unknown error. Please e-mail us to let us know how it happened."
-msgstr "Erro desconhecido. Por favor envia-nos um e-mail a descrever o sucedido."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid ""
@@ -636,11 +606,7 @@ msgid_plural ""
 "You are re-using a password that you have used recently. You must have {num}"
 " distinct passwords before reusing a previous password."
 msgstr[0] ""
-"Estás a reutilizar uma palavra-chave que usaste recentemente. Tens de ter {num}"
-" palavra-chave diferente antes de reutilizar uma palavra-chave antiga."
 msgstr[1] ""
-"Estás a reutilizar uma palavra-chave que usaste recentemente. Tens de ter {num}"
-" palavras-chave diferentes antes de reutilizar uma palavra-chave antiga."
 
 #: common/djangoapps/student/views.py
 msgid ""
@@ -650,51 +616,47 @@ msgid_plural ""
 "You are resetting passwords too frequently. Due to security policies, {num} "
 "days must elapse between password resets."
 msgstr[0] ""
-"Estás a repor palavras-chave demasiado frequentemente. Por motivos de segurança, "
-" deve passar pelo menos {num} dia entre reposições."
 msgstr[1] ""
-"Estás a repor palavras-chave demasiado frequentemente. Por motivos de segurança, "
-" devem passar pelo menos {num} dias entre reposições."
 
 #: common/djangoapps/student/views.py
 msgid "Password reset unsuccessful"
-msgstr "A reposição da palavra-chave falhou"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "No inactive user with this e-mail exists"
-msgstr "Não existe nenhum utilizador inativo com este e-mail"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Unable to send reactivation email"
-msgstr "Não foi possível enviar o e-mail de reativação"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Invalid password"
-msgstr "Palavra-chave inválida"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Valid e-mail address required."
-msgstr "É necessário um endereço de e-mail válido."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Old email is the same as the new email."
-msgstr "O e-mail antigo é igual ao novo."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "An account with this e-mail already exists."
-msgstr "Já existe uma conta com este endereço de e-mail."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Unable to send email activation link. Please try again later."
-msgstr "Falhou o envio do link de ativação. Por favor tente mais tarde."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Name required"
-msgstr "Nome (obrigatório)"
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Invalid ID"
-msgstr "ID inválido"
+msgstr ""
 
 #. Translators: the translation for "LONG_DATE_FORMAT" must be a format
 #. string for formatting dates in a long form.  For example, the
@@ -702,7 +664,7 @@ msgstr "ID inválido"
 #. See http://strftime.org for details.
 #: common/djangoapps/util/date_utils.py
 msgid "LONG_DATE_FORMAT"
-msgstr "LONG_DATE_FORMAT"
+msgstr ""
 
 #. Translators: the translation for "DATE_TIME_FORMAT" must be a format
 #. string for formatting dates with times.  For example, the American
@@ -710,7 +672,7 @@ msgstr "LONG_DATE_FORMAT"
 #. See http://strftime.org for details.
 #: common/djangoapps/util/date_utils.py
 msgid "DATE_TIME_FORMAT"
-msgstr "DATE_TIME_FORMAT"
+msgstr ""
 
 #. Translators: the translation for "SHORT_DATE_FORMAT" must be a
 #. format string for formatting dates in a brief form.  For example,
@@ -718,14 +680,14 @@ msgstr "DATE_TIME_FORMAT"
 #. See http://strftime.org for details.
 #: common/djangoapps/util/date_utils.py
 msgid "SHORT_DATE_FORMAT"
-msgstr "SHORT_DATE_FORMAT"
+msgstr ""
 
 #. Translators: the translation for "TIME_FORMAT" must be a format
 #. string for formatting times.  For example, the American English
 #. form is "%H:%M:%S". See http://strftime.org for details.
 #: common/djangoapps/util/date_utils.py
 msgid "TIME_FORMAT"
-msgstr "TIME_FORMAT"
+msgstr ""
 
 #. Translators: This is an AM/PM indicator for displaying times.  It is
 #. used for the %p directive in date-time formats. See http://strftime.org
@@ -733,7 +695,7 @@ msgstr "TIME_FORMAT"
 #: common/djangoapps/util/date_utils.py
 msgctxt "am/pm indicator"
 msgid "AM"
-msgstr "AM"
+msgstr ""
 
 #. Translators: This is an AM/PM indicator for displaying times.  It is
 #. used for the %p directive in date-time formats. See http://strftime.org
@@ -741,7 +703,7 @@ msgstr "AM"
 #: common/djangoapps/util/date_utils.py
 msgctxt "am/pm indicator"
 msgid "PM"
-msgstr "PM"
+msgstr ""
 
 #. Translators: this is a weekday name that will be used when displaying
 #. dates, as in "Monday Februrary 10, 2014". It is used for the %A
@@ -749,7 +711,7 @@ msgstr "PM"
 #: common/djangoapps/util/date_utils.py
 msgctxt "weekday name"
 msgid "Monday"
-msgstr "Segunda-feira"
+msgstr ""
 
 #. Translators: this is a weekday name that will be used when displaying
 #. dates, as in "Tuesday Februrary 11, 2014". It is used for the %A
@@ -757,7 +719,7 @@ msgstr "Segunda-feira"
 #: common/djangoapps/util/date_utils.py
 msgctxt "weekday name"
 msgid "Tuesday"
-msgstr "Terça-feira"
+msgstr ""
 
 #. Translators: this is a weekday name that will be used when displaying
 #. dates, as in "Wednesday Februrary 12, 2014". It is used for the %A
@@ -765,7 +727,7 @@ msgstr "Terça-feira"
 #: common/djangoapps/util/date_utils.py
 msgctxt "weekday name"
 msgid "Wednesday"
-msgstr "Quarta-feira"
+msgstr ""
 
 #. Translators: this is a weekday name that will be used when displaying
 #. dates, as in "Thursday Februrary 13, 2014". It is used for the %A
@@ -773,7 +735,7 @@ msgstr "Quarta-feira"
 #: common/djangoapps/util/date_utils.py
 msgctxt "weekday name"
 msgid "Thursday"
-msgstr "Quinta-feira"
+msgstr ""
 
 #. Translators: this is a weekday name that will be used when displaying
 #. dates, as in "Friday Februrary 14, 2014". It is used for the %A
@@ -781,7 +743,7 @@ msgstr "Quinta-feira"
 #: common/djangoapps/util/date_utils.py
 msgctxt "weekday name"
 msgid "Friday"
-msgstr "Sexta-feira"
+msgstr ""
 
 #. Translators: this is a weekday name that will be used when displaying
 #. dates, as in "Saturday Februrary 15, 2014". It is used for the %A
@@ -789,7 +751,7 @@ msgstr "Sexta-feira"
 #: common/djangoapps/util/date_utils.py
 msgctxt "weekday name"
 msgid "Saturday"
-msgstr "Sábado"
+msgstr ""
 
 #. Translators: this is a weekday name that will be used when displaying
 #. dates, as in "Sunday Februrary 16, 2014". It is used for the %A
@@ -797,7 +759,7 @@ msgstr "Sábado"
 #: common/djangoapps/util/date_utils.py
 msgctxt "weekday name"
 msgid "Sunday"
-msgstr "Domingo"
+msgstr ""
 
 #. Translators: this is an abbreviated weekday name that will be used when
 #. displaying dates, as in "Mon Feb 10, 2014". It is used for the %a
@@ -805,7 +767,7 @@ msgstr "Domingo"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated weekday name"
 msgid "Mon"
-msgstr "Seg"
+msgstr ""
 
 #. Translators: this is an abbreviated weekday name that will be used when
 #. displaying dates, as in "Tue Feb 11, 2014". It is used for the %a
@@ -813,7 +775,7 @@ msgstr "Seg"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated weekday name"
 msgid "Tue"
-msgstr "Ter"
+msgstr ""
 
 #. Translators: this is an abbreviated weekday name that will be used when
 #. displaying dates, as in "Wed Feb 12, 2014". It is used for the %a
@@ -821,7 +783,7 @@ msgstr "Ter"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated weekday name"
 msgid "Wed"
-msgstr "Qua"
+msgstr ""
 
 #. Translators: this is an abbreviated weekday name that will be used when
 #. displaying dates, as in "Thu Feb 13, 2014". It is used for the %a
@@ -829,7 +791,7 @@ msgstr "Qua"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated weekday name"
 msgid "Thu"
-msgstr "Qui"
+msgstr ""
 
 #. Translators: this is an abbreviated weekday name that will be used when
 #. displaying dates, as in "Fri Feb 14, 2014". It is used for the %a
@@ -837,7 +799,7 @@ msgstr "Qui"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated weekday name"
 msgid "Fri"
-msgstr "Sex"
+msgstr ""
 
 #. Translators: this is an abbreviated weekday name that will be used when
 #. displaying dates, as in "Sat Feb 15, 2014". It is used for the %a
@@ -845,7 +807,7 @@ msgstr "Sex"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated weekday name"
 msgid "Sat"
-msgstr "Sáb"
+msgstr ""
 
 #. Translators: this is an abbreviated weekday name that will be used when
 #. displaying dates, as in "Sun Feb 16, 2014". It is used for the %a
@@ -853,7 +815,7 @@ msgstr "Sáb"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated weekday name"
 msgid "Sun"
-msgstr "Dom"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Jan 10, 2014". It is used for the %b
@@ -861,7 +823,7 @@ msgstr "Dom"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Jan"
-msgstr "Jan"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Feb 10, 2014". It is used for the %b
@@ -869,7 +831,7 @@ msgstr "Jan"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Feb"
-msgstr "Fev"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Mar 10, 2014". It is used for the %b
@@ -877,7 +839,7 @@ msgstr "Fev"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Mar"
-msgstr "Mar"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Apr 10, 2014". It is used for the %b
@@ -885,7 +847,7 @@ msgstr "Mar"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Apr"
-msgstr "Abr"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "May 10, 2014". It is used for the %b
@@ -893,7 +855,7 @@ msgstr "Abr"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "May"
-msgstr "Mai"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Jun 10, 2014". It is used for the %b
@@ -901,7 +863,7 @@ msgstr "Mai"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Jun"
-msgstr "Jun"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Jul 10, 2014". It is used for the %b
@@ -909,7 +871,7 @@ msgstr "Jun"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Jul"
-msgstr "Jul"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Aug 10, 2014". It is used for the %b
@@ -917,7 +879,7 @@ msgstr "Jul"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Aug"
-msgstr "Ago"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Sep 10, 2014". It is used for the %b
@@ -925,7 +887,7 @@ msgstr "Ago"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Sep"
-msgstr "Set"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Oct 10, 2014". It is used for the %b
@@ -933,7 +895,7 @@ msgstr "Set"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Oct"
-msgstr "Out"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Nov 10, 2014". It is used for the %b
@@ -941,7 +903,7 @@ msgstr "Out"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 #. Translators: this is an abbreviated month name that will be used when
 #. displaying dates, as in "Dec 10, 2014". It is used for the %b
@@ -949,7 +911,7 @@ msgstr "Nov"
 #: common/djangoapps/util/date_utils.py
 msgctxt "abbreviated month name"
 msgid "Dec"
-msgstr "Dez"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "January 10, 2014". It is used for the %B directive in
@@ -957,7 +919,7 @@ msgstr "Dez"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "January"
-msgstr "Janeiro"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "February 10, 2014". It is used for the %B directive in
@@ -965,7 +927,7 @@ msgstr "Janeiro"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "February"
-msgstr "Fevereiro"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "March 10, 2014". It is used for the %B directive in
@@ -973,7 +935,7 @@ msgstr "Fevereiro"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "March"
-msgstr "Março"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "April 10, 2014". It is used for the %B directive in
@@ -981,7 +943,7 @@ msgstr "Março"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "April"
-msgstr "Abril"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "May 10, 2014". It is used for the %B directive in
@@ -989,7 +951,7 @@ msgstr "Abril"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "May"
-msgstr "Maio"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "June 10, 2014". It is used for the %B directive in
@@ -997,7 +959,7 @@ msgstr "Maio"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "June"
-msgstr "Junho"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "July 10, 2014". It is used for the %B directive in
@@ -1005,7 +967,7 @@ msgstr "Junho"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "July"
-msgstr "Julho"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "August 10, 2014". It is used for the %B directive in
@@ -1013,7 +975,7 @@ msgstr "Julho"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "August"
-msgstr "Agosto"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "September 10, 2014". It is used for the %B directive in
@@ -1021,7 +983,7 @@ msgstr "Agosto"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "September"
-msgstr "Setembro"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "October 10, 2014". It is used for the %B directive in
@@ -1029,7 +991,7 @@ msgstr "Setembro"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "October"
-msgstr "Outubro"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "November 10, 2014". It is used for the %B directive in
@@ -1037,7 +999,7 @@ msgstr "Outubro"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "November"
-msgstr "Novembro"
+msgstr ""
 
 #. Translators: this is a month name that will be used when displaying
 #. dates, as in "December 10, 2014". It is used for the %B directive in
@@ -1045,109 +1007,108 @@ msgstr "Novembro"
 #: common/djangoapps/util/date_utils.py
 msgctxt "month name"
 msgid "December"
-msgstr "Dezembro"
+msgstr ""
 
 #: common/djangoapps/util/file.py
 msgid "The file must end with the extension '{file_types}'."
 msgid_plural ""
 "The file must end with one of the following extensions: '{file_types}'."
-msgstr[0] "O ficheiro deve ter a extensão '{file_types}'."
+msgstr[0] ""
 msgstr[1] ""
-"O ficheiro deve ter uma das seguintes extensões: '{file_types}'."
 
 #: common/djangoapps/util/file.py
 msgid "Maximum upload file size is {file_size} bytes."
-msgstr "Tamanho máximo do ficheiro é {file_size} bytes."
+msgstr ""
 
 #: common/djangoapps/util/milestones_helpers.py
 msgid "Course {course_id} requires {prerequisite_course_id}"
-msgstr "O curso {course_id} necessita de {prerequisite_course_id}"
+msgstr ""
 
 #: common/djangoapps/util/milestones_helpers.py
 msgid "System defined milestone"
-msgstr "Meta definida pelo sistema"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "Invalid Length ({0})"
-msgstr "Comprimento inválido ({0})"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must be {0} characters or more"
-msgstr "precisa de ter {0} caracteres ou mais"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must be {0} characters or less"
-msgstr "não pode ter mais que {0} caracteres"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "Must be more complex ({0})"
-msgstr "Tem de ser mais complexo ({0})"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must contain {0} or more uppercase characters"
-msgstr "precisa de conter {0} ou mais caracteres em maiúscula"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must contain {0} or more lowercase characters"
-msgstr "precisa de conter {0} ou mais caracteres em minúscula"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must contain {0} or more digits"
-msgstr "precisa de conter {0} ou mais dígitos"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must contain {0} or more punctuation characters"
-msgstr "precisa de conter {0} ou mais caracteres de pontuação"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must contain {0} or more non ascii characters"
-msgstr "precisa de conter {0} ou mais caracteres não ascii"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must contain {0} or more unique words"
-msgstr "precisa de conter {0} ou mais palavras únicas"
+msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "Too similar to a restricted dictionary word."
-msgstr "Demasiado parecida com uma palavra restrita."
+msgstr ""
 
 #: common/lib/capa/capa/capa_problem.py
 msgid "Cannot rescore problems with possible file submissions"
-msgstr "Não é permitido reavaliar problemas com possíveis submissões de ficheiros"
+msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py
 msgid "correct"
-msgstr "correto"
+msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py
 msgid "incorrect"
-msgstr "incorreto"
+msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py
 msgid "incomplete"
-msgstr "incompleto"
+msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py
 msgid "unanswered"
-msgstr "não respondido"
+msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py
 msgid "processing"
-msgstr "a processar"
+msgstr ""
 
 #. Translators: 'ChoiceGroup' is an input type and should not be translated.
 #: common/lib/capa/capa/inputtypes.py
 msgid "ChoiceGroup: unexpected tag {tag_name}"
-msgstr "ChoiceGroup: etiqueta {tag_name} inesperada"
+msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py
 msgid "Answer received."
-msgstr "Resposta recebida."
+msgstr ""
 
 #. Translators: '<choice>' is a tag name and should not be translated.
 #: common/lib/capa/capa/inputtypes.py
 msgid "Expected a <choice> tag; got {given_tag} instead"
-msgstr "Era esperada a etiqueta <choice>; mas foi obtida {given_tag}"
+msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py
 msgid ""
@@ -7890,7 +7851,7 @@ msgstr ""
 
 #: cms/templates/login.html lms/templates/login.html
 msgid "Forgot password?"
-msgstr "Esqueceste-te da tua palavra-chave?"
+msgstr ""
 
 #. Translators: This is the placeholder text for a field that requests the
 #. user's full name.
@@ -8826,7 +8787,7 @@ msgstr ""
 
 #: lms/templates/navigation.html
 msgid "Register Now"
-msgstr "Regista-te Agora"
+msgstr ""
 
 #: lms/templates/notes.html lms/templates/textannotation.html
 #: lms/templates/videoannotation.html
