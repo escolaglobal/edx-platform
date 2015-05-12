@@ -76,15 +76,36 @@ class LoginSessionView(APIView):
             u"The email address you used to register with {platform_name}"
         ).format(platform_name=settings.PLATFORM_NAME)
 
+
+        username_label = _(u"Username")
+
+        username_placeholder = _(u"Username")
+
+        username_instructions = _(u"")
+
+
+
+        #form_desc.add_field(
+        #    "email",
+        #    field_type="email",
+        #    label=email_label,
+        #    placeholder=email_placeholder,
+        #    instructions=email_instructions,
+        #    restrictions={
+        #        "min_length": EMAIL_MIN_LENGTH,
+        #        "max_length": EMAIL_MAX_LENGTH,
+        #    }
+        #)
+
         form_desc.add_field(
-            "email",
-            field_type="email",
-            label=email_label,
-            placeholder=email_placeholder,
-            instructions=email_instructions,
+            "username",
+            field_type="text",
+            label=username_label,
+            placeholder=username_placeholder,
+            instructions=username_instructions,
             restrictions={
-                "min_length": EMAIL_MIN_LENGTH,
-                "max_length": EMAIL_MAX_LENGTH,
+                "min_length": USERNAME_MIN_LENGTH,
+                "max_length": USERNAME_MAX_LENGTH,
             }
         )
 
@@ -112,7 +133,7 @@ class LoginSessionView(APIView):
 
         return HttpResponse(form_desc.to_json(), content_type="application/json")
 
-    @method_decorator(require_post_params(["email", "password"]))
+    @method_decorator(require_post_params(["username", "password"]))
     @method_decorator(csrf_protect)
     def post(self, request):
         """Log in a user.

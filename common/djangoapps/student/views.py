@@ -944,6 +944,7 @@ def login_user(request, error=""):  # pylint: disable-msg=too-many-statements,un
 
     backend_name = None
     email = None
+    username = None
     password = None
     redirect_url = None
     response = None
@@ -989,16 +990,16 @@ def login_user(request, error=""):  # pylint: disable-msg=too-many-statements,un
 
     else:
 
-        if 'email' not in request.POST or 'password' not in request.POST:
+        if 'username' not in request.POST or 'password' not in request.POST:
             return JsonResponse({
                 "success": False,
                 "value": _('There was an error receiving your login information. Please email us.'),  # TODO: User error message
             })  # TODO: this should be status code 400  # pylint: disable=fixme
 
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(username=username)
         except User.DoesNotExist:
             if settings.FEATURES['SQUELCH_PII_IN_LOGS']:
                 AUDIT_LOG.warning(u"Login failed - Unknown user email")
