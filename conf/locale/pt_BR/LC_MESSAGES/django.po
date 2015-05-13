@@ -9385,6 +9385,9 @@ msgstr ""
 msgid "My Profile"
 msgstr ""
 
+msgid "Sign out"
+msgstr "sair"
+
 #: lms/templates/navigation-edx.html lms/templates/navigation.html
 msgid "Shopping Cart"
 msgstr "Carrinho de compras"
