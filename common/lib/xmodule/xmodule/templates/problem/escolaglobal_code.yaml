@@ -2,7 +2,6 @@
 metadata:
     display_name: Python and Blockly for escolaglobal
     markdown: !!null
-    value: python
 data: |
       <!--escola-global-tag-->
       <problem>
