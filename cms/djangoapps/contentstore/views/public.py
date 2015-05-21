@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 
 from edxmako.shortcuts import render_to_response
 
@@ -28,6 +29,9 @@ def signup(request):
     # if request.user.is_authenticated():
     #     return redirect('/course/')
     #
+
+    if not request.user.is_staff:
+        raise PermissionDenied
 
     if settings.FEATURES.get('AUTH_USE_CERTIFICATES_IMMEDIATE_SIGNUP'):
         # Redirect to course to login to process their certificate if SSL is enabled
