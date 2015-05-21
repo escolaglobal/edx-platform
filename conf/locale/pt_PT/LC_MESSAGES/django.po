@@ -77,6 +77,11 @@ msgstr ""
 "Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+
+#: cms/templates/widgets/header.html
+msgid "Register Account"
+msgstr "Registar Conta"
+
 #. Translators: "Open Ended Panel" appears on a tab that, when clicked, opens
 #. up a panel that
 #. displays information about open-ended problems that a user has submitted or
