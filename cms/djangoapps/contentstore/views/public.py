@@ -6,6 +6,7 @@ from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 from edxmako.shortcuts import render_to_response
 
@@ -16,14 +17,18 @@ from microsite_configuration import microsite
 __all__ = ['signup', 'login_page', 'howitworks']
 
 
+@login_required
 @ensure_csrf_cookie
 def signup(request):
     """
     Display the signup form.
     """
     csrf_token = csrf(request)['csrf_token']
-    if request.user.is_authenticated():
-        return redirect('/course/')
+    #
+    # if request.user.is_authenticated():
+    #     return redirect('/course/')
+    #
+
     if settings.FEATURES.get('AUTH_USE_CERTIFICATES_IMMEDIATE_SIGNUP'):
         # Redirect to course to login to process their certificate if SSL is enabled
         # and registration is disabled.
