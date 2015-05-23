@@ -1,9 +1,9 @@
 ---
 metadata:
-    display_name: Python and Blockly for escolaglobal
+    display_name: Blockly Exercise (escolaglobal)
     markdown: !!null
 data: |
-      <!--escola-global-tag-->
+      <!--blockly-tag-->
       <problem>
        <!--Use the wizard to get started -->
       </problem>

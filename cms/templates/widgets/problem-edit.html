@@ -35,26 +35,40 @@
         </div>
         <textarea class="markdown-box">${markdown | h}</textarea>
         %else:
-            <% is_escolaglobal = "<!--escola-global-tag-->" in data %>
+            <% is_python = "<!--python-tag-->" in data%>
+            <% is_blockly = "<!--blockly-tag-->" in data%>
+            <% is_escolaglobal = is_python or is_blockly%>
             %if is_escolaglobal:
-        <div class="custom-area" style="text-align: right">
-            coding@escolablobal: <span id="pythonExercise"><a>Python exercise wizard</a></span> <span id="blocklyExercise"><a>Blockly exercise wizard</a> </span>
-            <div id="AmazingEditor" style="display:none; position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999; background-color:white;">
-                <span id="save-editor-iframe"><a>Generate Code</a> </span>   <span id="close-editor-iframe"><a>Close</a> </span>
-                <div style="text-align: center"> Loading... </div>            
-            </div>
+        <div class="editor-bar custom-area">
+            %if is_python:
+                <% eg_tag = "<!--python-tag-->"%>
+                <span id="pythonExercise"><a>Python exercise wizard</a></span>
+            %else:
+                <% eg_tag = "<!--blockly-tag-->"%>
+                <span id="blocklyExercise"><a>Blockly exercise wizard</a></span>
+            %endif
         </div>
+            <div id="AmazingEditor" style="text-align: right; display:none; position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999; background-color:white;">
+                <span id="save-editor-iframe"><a>Generate Code</a> </span><span id="close-editor-iframe"><a>Close</a> </span>
+                <div style="text-align: center"> Loading... </div>
+            </div>
             %endif
         %endif
         <textarea class="xml-box" rows="8" cols="40">${data | h}</textarea>
     </div>
 </section>
 
+%if is_escolaglobal:
 <script type="text/javascript">
 $( document ).ready(function() {
     var url_base = "http://localhost:3000/";
     var problem_url = $(".xblock-editor").attr("data-locator").split("/");
     var problem_name = problem_url[problem_url.length - 1];
+    var cont_eg = $(".xml-box").text();
+    if(cont_eg.indexOf("<!--exercise id:")>=0 && cont_eg.indexOf("<!--exercise id: "+problem_name+"-->")<0)
+        alert("You are editing a duplicate problem." +
+        "Using the wizard will not edit the original one but create a new one." +
+        " To edit the original one, edit it directly.");
     $("#pythonExercise").click(function () {
         openEditor(true);
     });
@@ -65,12 +79,12 @@ $( document ).ready(function() {
         $("#AmazingEditor").hide();
         $("#editor-iframe").remove();
 
-        window.codemirrorobject.setValue("<!--escola-global-tag-->\nPlease wait while we generate the code...");
+        window.codemirrorobject.setValue("${eg_tag}\nPlease wait while we generate the code...");
 
         $.getJSON( url_base+"generateCode/"+problem_name+"?callback=?", function( data ) {
             window.codemirrorobject.setValue(data.output);
         }).fail(function() {
-            window.codemirrorobject.setValue("<!--escola-global-tag-->\nThere was an error generating your code. Please try again");
+            window.codemirrorobject.setValue("${eg_tag}\nThere was an error generating your code. Please try again");
         });
     });
 
@@ -93,7 +107,7 @@ function openEditor(python)
 }
 });
 </script>
-
+%endif
 <script type="text/template" id="simple-editor-cheatsheet">
     <article class="simple-editor-cheatsheet">
         <div class="cheatsheet-wrapper">
