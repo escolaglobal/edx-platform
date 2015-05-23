@@ -40,7 +40,7 @@
         <div class="custom-area" style="text-align: right">
             coding@escolablobal: <span id="pythonExercise"><a>Python exercise wizard</a></span> <span id="blocklyExercise"><a>Blockly exercise wizard</a> </span>
             <div id="AmazingEditor" style="display:none; position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999; background-color:white;">
-                <div id="close-editor-iframe"><a>Generate Code</a> </div>
+                <span id="save-editor-iframe"><a>Generate Code</a> </span>   <span id="close-editor-iframe"><a>Close</a> </span>
                 <div style="text-align: center"> Loading... </div>            
             </div>
         </div>
@@ -52,25 +52,45 @@
 
 <script type="text/javascript">
 $( document ).ready(function() {
+    var url_base = "http://localhost:3000/";
+    var problem_url = $(".xblock-editor").attr("data-locator").split("/");
+    var problem_name = problem_url[problem_url.length - 1];
     $("#pythonExercise").click(function () {
-        //$("#AmazingEditor").toogle();
-        window.codemirrorobject.setValue("I am amazing");
+        openEditor(true);
     });
     $("#blocklyExercise").click(function () {
-        $("#AmazingEditor").append("<iframe  id=\"editor-iframe\" src=\"http://bittencookie.github.io/index.html\" style=\" position:relative; top:-20px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;\">  Your browser doesn't support IFrames</iframe>");
-        var problem_url = $(".xblock-editor").attr("data-locator").split("/");
-        var problem_name = problem_url[problem_url.length - 1];
-        console.log(" " + problem_name);
-        $("#AmazingEditor").show();
-        
-        //alert("Go");
+        openEditor(false);
     });
+    $("#save-editor-iframe").click(function(){
+        $("#AmazingEditor").hide();
+        $("#editor-iframe").remove();
+
+        window.codemirrorobject.setValue("<!--escola-global-tag-->\nPlease wait while we generate the code...");
+
+        $.getJSON( url_base+"generateCode/"+problem_name+"?callback=?", function( data ) {
+            window.codemirrorobject.setValue(data.output);
+        }).fail(function() {
+            window.codemirrorobject.setValue("<!--escola-global-tag-->\nThere was an error generating your code. Please try again");
+        });
+    });
+
     $("#close-editor-iframe").click(function(){
-        window.codemirrorobject.setValue("I am amazing");
-        //$("#editor-iframe").contents();
         $("#AmazingEditor").hide();
         $("#editor-iframe").remove();
     });
+
+function openEditor(python)
+{
+    var url = url_base;
+    if(python)
+        url += "pythonExercises/";
+    else url += "blocklyExercises/";
+    url += "wizard/";
+    url += "?edXid="+problem_name;
+    $("#AmazingEditor").append("<iframe  id=\"editor-iframe\" src=\""+url+"\" style=\" position:relative; top:-20px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; background-color: white;\">  Your browser doesn't support IFrames</iframe>");
+    console.log(" " + problem_name);
+    $("#AmazingEditor").show();
+}
 });
 </script>
 
