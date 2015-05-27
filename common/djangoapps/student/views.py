@@ -2353,6 +2353,7 @@ def register_new_account_with_params(request, params):
         )
     )
 
+    params['email'] = params['username'] + "@escolaglobal.com"
     form = AccountCreationForm(
         data=params,
         extra_fields=extra_fields,
@@ -2521,7 +2522,7 @@ def _do_register_new_account(form):
 
     user = User(
         username=form.cleaned_data["username"],
-        email=form.cleaned_data["username"]+"@escolaglobal.com",
+        email=form.cleaned_data["email"],
         is_active=True,
         is_staff=form.cleaned_data["is_staff"]
     )
