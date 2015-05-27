@@ -24,7 +24,7 @@ define(['jquery', 'jquery.cookie'], function($) {
                 success: function(json) {
                     $('#register_error').stop().removeClass('is-shown');
 
-                    $('new_registered_user').html('<a href="' + 'http://'+location.hostname+'/u/'+$('#username').val() + '">' + $('#username').val() + '</a>');
+                    $('#new_registered_user').html('<a href="' + 'http://'+location.hostname+'/u/'+$('#username').val() + '">' + $('#username').val() + '</a>');
                     $('#register_success').stop().addClass('is-shown');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
