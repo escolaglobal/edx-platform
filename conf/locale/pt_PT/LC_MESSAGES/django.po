@@ -82,6 +82,10 @@ msgstr ""
 msgid "Register Account"
 msgstr "Registar Conta"
 
+#: cms/templates/register.html
+msgid "Successfully registered user: "
+msgstr "Utilizador registado com sucesso: "
+
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Explore edX's Support Tools"
 msgstr "Explorar Ferramentas de Suporte do EDX"

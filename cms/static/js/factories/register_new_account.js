@@ -11,6 +11,7 @@ define(['jquery', 'jquery.cookie'], function($) {
 
         $('form#register_form').submit(function(event) {
             event.preventDefault();
+            $('#register_success').stop().removeClass('is-shown');
             var submit_data = $('#register_form').serialize();
 
             $.ajax({
@@ -21,7 +22,10 @@ define(['jquery', 'jquery.cookie'], function($) {
                 notifyOnError: false,
                 data: submit_data,
                 success: function(json) {
-                    location = 'http://'+location.hostname+'/u/'+$('#username').val();
+                    $('#register_error').stop().removeClass('is-shown');
+
+                    $('new_registered_user').html('<a href="' + 'http://'+location.hostname+'/u/'+$('#username').val() + '">' + $('#username').val() + '</a>');
+                    $('#register_success').stop().addClass('is-shown');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                    var json = $.parseJSON(jqXHR.responseText);

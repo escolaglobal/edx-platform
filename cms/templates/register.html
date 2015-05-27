@@ -21,6 +21,9 @@
       <form id="register_form" method="post">
         <div id="register_error" name="register_error" class="message message-status message-status error">
         </div>
+        <div id="register_success" name="register_success" class="message message-status message-status success">
+          ${_("Successfully registered user: ")}<span id="new_registered_user"></span>
+        </div>
 
         <fieldset>
           <legend class="sr">${_("Required Information to Sign Up for {studio_name}").format(studio_name=settings.STUDIO_NAME)}</legend>
@@ -41,10 +44,9 @@
             </li>
 
             <li class="field text required" id="field-username">
-              <label for="username">${_("Public Username")}</label>
+              <label for="username">${_("Username")}</label>
               ## Translators: This is the placeholder text for a field that asks the user to pick a username
               <input id="username" type="text" name="username" placeholder="${_("example: JaneDoe")}" />
-              <span class="tip tip-stacked">${_("This will be used in public discussions with your courses and in our edX101 support forums")}</span>
             </li>
 
             <li class="field text required" id="field-password">

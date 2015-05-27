@@ -35,6 +35,11 @@
     background: $red-l1;
   }
 
+  &.success {
+    border-color: $green-d3;
+    background: $green-d1;
+  }
+
   &.is-shown {
     display: block;
   }
