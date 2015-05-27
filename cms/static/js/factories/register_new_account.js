@@ -21,7 +21,7 @@ define(['jquery', 'jquery.cookie'], function($) {
                 notifyOnError: false,
                 data: submit_data,
                 success: function(json) {
-                    location.href = '/u/'+$('#username').val();
+                    location = 'http://'+location.hostname+'/u/'+$('#username').val();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                    var json = $.parseJSON(jqXHR.responseText);
