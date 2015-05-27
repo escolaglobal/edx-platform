@@ -11,8 +11,8 @@
 <div class="wrapper-content wrapper">
   <section class="content">
     <header>
-      <h1 class="title title-1">${_("Sign Up for {studio_name}").format(studio_name=settings.STUDIO_NAME)}</h1>
-      <a href="${reverse('login')}" class="action action-signin">${_("Already have a {studio_name} Account? Sign in").format(studio_name=settings.STUDIO_SHORT_NAME)}</a>
+      <h1 class="title title-1">${_("Register for {platform_name}").format(studio_name=settings.STUDIO_NAME)}</h1>
+      <!-- <a href="${reverse('login')}" class="action action-signin">${_("Already have a {studio_name} Account? Sign in").format(studio_name=settings.STUDIO_SHORT_NAME)}</a> -->
     </header>
 
     <p class="introduction">${_("Ready to start creating online courses? Sign up below and start creating your first {platform_name} course today.").format(platform_name=settings.PLATFORM_NAME)}</p>
@@ -26,11 +26,13 @@
           <legend class="sr">${_("Required Information to Sign Up for {studio_name}").format(studio_name=settings.STUDIO_NAME)}</legend>
 
           <ol class="list-input">
+              <!--
             <li class="field text required" id="field-email">
               <label for="email">${_("E-mail")}</label>
               ## Translators: This is the placeholder text for a field that requests an email address.
               <input id="email" type="email" name="email" placeholder="${_("example: username@domain.com")}" />
             </li>
+             -->
 
             <li class="field text required" id="field-name">
               <label for="name">${_("Full Name")}</label>
@@ -50,6 +52,14 @@
               <input id="password" type="password" name="password" />
             </li>
 
+            <li class="field checkbox required" id="field-staff">
+              <input id="is_staff" name="is_staff" type="checkbox" value="true"/>
+              <label for="is_staff">
+                ${_("Staff")}
+              </label>
+            </li>
+
+            <!--
             <li class="field-group">
               <div class="field text" id="field-location">
                 <label for="location">${_("Your Location")}</label>
@@ -61,18 +71,19 @@
                 <input class="short" id="language" type="text" name="language" />
               </div>
             </li>
+            -->
 
-            <li class="field checkbox required" id="field-tos">
-              <input id="tos" name="terms_of_service" type="checkbox" value="true" />
-              <label for="tos">
+            <!-- <li class="field checkbox required" id="field-tos"> -->
+              <input id="tos" name="terms_of_service" type="checkbox" value="true" checked="true" hidden="true"/>
+              <!-- <label for="tos">
                 ${_("I agree to the {a_start} Terms of Service {a_end}").format(a_start='<a data-rel="edx.org" href="{}">'.format(marketing_link('TOS')), a_end="</a>")}
-              </label>
-            </li>
+              </label> -->
+            <!-- </li> -->
           </ol>
         </fieldset>
 
         <div class="form-actions">
-          <button type="submit" id="submit" name="submit" class="action action-primary">${_("Create My Account &amp; Start Authoring Courses")}</button>
+          <button type="submit" id="submit" name="submit" class="action action-primary">${_("Register Account")}</button>
         </div>
 
         <!-- no honor code for CMS, but need it because we're using the lms student object -->
@@ -107,7 +118,7 @@
 </%block>
 
 <%block name="requirejs">
-    require(["js/factories/register"], function (RegisterFactory) {
+    require(["js/factories/register_new_account"], function (RegisterFactory) {
         RegisterFactory();
     });
 </%block>
