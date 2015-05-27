@@ -21,7 +21,6 @@ define(['jquery', 'jquery.cookie'], function($) {
                 notifyOnError: false,
                 data: submit_data,
                 success: function(json) {
-                    console.log('Successfully registered user ' + $('#username').val() + '!');
                     location.href = '/u/'+$('#username').val();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
