@@ -135,6 +135,8 @@ class AccountCreationForm(forms.Form):
             "min_length": _NAME_TOO_SHORT_MSG,
         }
     )
+    is_staff = forms.BooleanField(
+    )
 
     def __init__(
             self,
