@@ -90,6 +90,14 @@ msgstr "Utilizador registado com sucesso: "
 msgid "This user is a Staff member"
 msgstr "Este utilizador é um membro da Staff"
 
+#lms/templates/index.html
+msgid "Welcome to coding@escolaglobal!"
+msgstr "Bem-vindo ao coding@escolaglobal!"
+
+#lms/templates/index.html
+msgid "We really like cookies."
+msgstr "Nós gostamos mesmo de bolachas."
+
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Explore edX's Support Tools"
 msgstr "Explorar Ferramentas de Suporte do EDX"
