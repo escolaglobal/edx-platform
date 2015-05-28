@@ -68,10 +68,10 @@ $( document ).ready(function() {
     var cont_eg = $(".xml-box").text();
     var idedx2 = null;
     var id_tag = cont_eg.match("<!--exercise id: [a-z0-9]+-->");
-    if(id_tag.length>0)
+    if(id_tag != null)
     {
         var id_on_text = id_tag[0].match("[a-z0-9]+(?=-->)");
-        if(id_on_text.length > 0 && id_on_text[0]!=problem_name){
+        if(id_on_text != null && id_on_text[0]!=problem_name){
             idedx2 = id_on_text[0];
         }
     }
