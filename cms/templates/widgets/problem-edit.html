@@ -3,6 +3,10 @@
 
 <% isLaTexProblem='source_code' in editable_metadata_fields and editable_metadata_fields['source_code']['explicitly_set'] and enable_latex_compiler %>
 
+<% is_python = "<!--python-tag-->" in data%>
+<% is_blockly = "<!--blockly-tag-->" in data%>
+<% is_escolaglobal = is_python or is_blockly%>
+
 % if isLaTexProblem:
 <div class="wrapper-comp-editor latex-problem" id="editor-tab">
 % else:
@@ -35,9 +39,6 @@
         </div>
         <textarea class="markdown-box">${markdown | h}</textarea>
         %else:
-            <% is_python = "<!--python-tag-->" in data%>
-            <% is_blockly = "<!--blockly-tag-->" in data%>
-            <% is_escolaglobal = is_python or is_blockly%>
             %if is_escolaglobal:
         <div class="editor-bar custom-area">
             %if is_python:
