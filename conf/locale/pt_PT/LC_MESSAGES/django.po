@@ -99,78 +99,6 @@ msgid "We really like cookies."
 msgstr "Nós gostamos mesmo de bolachas."
 
 #: common/lib/xmodule/xmodule/course_module.py
-msgid "Explore edX's Support Tools"
-msgstr "Explorar Ferramentas de Suporte do EDX"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Explore the Studio Help Forum"
-msgstr "Explorar o Fórum de Ajuda do Studio"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid ""
-"Access the Studio Help forum from the menu that appears when you click your "
-"user name in the top right corner of Studio."
-msgstr ""
-"Aceda ao fórum de Ajuda do Studio a partir do menu que aparece quando você "
-"clica no seu nome de utilizador no canto superior direito do Studio."
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Visit Studio Help"
-msgstr "Visite Studio Ajuda"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Enroll in edX 101"
-msgstr "Inscreva-se em edX 101"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Register for edX 101, edX's primer for course creation."
-msgstr "Registe-se para o edX 101, iniciador do edX para a criação de curso."
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Register for edX 101"
-msgstr "Registe-se para o edX 101"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Download the Studio Documentation"
-msgstr "Descarregar a Documentação do Studio"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Download the searchable Studio reference documentation in PDF form."
-msgstr ""
-"Descarregar a documentação de referência pesquisável do Studio em formato "
-"PDF."
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Download Documentation"
-msgstr "Descarregar Documentação"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Draft Your Course About Page"
-msgstr "Esboçar o Seu Curso Página Acerca de"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Draft a Course Description"
-msgstr "Esboçar uma Descrição do Curso"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid ""
-"Courses on edX have an About page that includes a course video, description, "
-"and more. Draft the text students will read before deciding to enroll in "
-"your course."
-msgstr ""
-"Cursos no edX têm uma página Sobre o que inclui um curso de vídeo, descrição,"
-" e muito mais. Esboçar o texto dos estudantes que vão ler antes de decidirem "
-"inscrever-se no seu curso."
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Edit Course Schedule &amp; Details"
-msgstr "Editar Curso Cronograma &amp; Detalhes"
-
-#: common/lib/xmodule/xmodule/course_module.py
-msgid "Add Staff Bios"
-msgstr "Adicionar Staff Bios"
-
-#: common/lib/xmodule/xmodule/course_module.py
 msgid ""
 "Showing prospective students who their instructor will be is helpful. "
 "Include staff bios on the course About page."
@@ -413,13 +341,13 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Both"
-msgstr ""
+msgstr "Ambos"
 
 #: common/lib/xmodule/xmodule/course_module.py
 #: lms/templates/footer-edx-new.html lms/templates/footer.html
 #: lms/templates/static_templates/about.html
 msgid "About"
-msgstr ""
+msgstr "Sobre"
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Entrance Exam Enabled"
@@ -465,7 +393,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #. Translators: TBD stands for 'To Be Determined' and is used when a course
 #. does not yet have an announced start date.
@@ -483,7 +411,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/discussion_module.py
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #: common/lib/xmodule/xmodule/discussion_module.py
 msgid ""
@@ -493,7 +421,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/discussion_module.py
 msgid "Subcategory"
-msgstr ""
+msgstr "Subcategoria"
 
 #: common/lib/xmodule/xmodule/discussion_module.py
 msgid ""
@@ -503,7 +431,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/html_module.py
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: common/lib/xmodule/xmodule/html_module.py
 #: common/lib/xmodule/xmodule/peer_grading_module.py
@@ -523,15 +451,15 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/html_module.py
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: common/lib/xmodule/xmodule/html_module.py
 msgid "Visual"
-msgstr ""
+msgstr "Visual"
 
 #: common/lib/xmodule/xmodule/html_module.py
 msgid "Raw"
-msgstr ""
+msgstr "Não preparado"
 
 #: common/lib/xmodule/xmodule/html_module.py
 msgid "HTML for the additional pages"
@@ -630,12 +558,12 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Any Type"
-msgstr ""
+msgstr "Qualquer Tipo"
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 #: cms/templates/widgets/header.html
 msgid "Library"
-msgstr ""
+msgstr "Biblioteca"
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Select the library from which you want to draw content."
@@ -643,11 +571,11 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Library Version"
-msgstr ""
+msgstr "Versão da Biblioteca"
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Mode"
-msgstr ""
+msgstr "Modo"
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Determines how content is drawn from the library"
@@ -659,7 +587,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Count"
-msgstr ""
+msgstr "Contagem"
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Enter the number of components to display to each student."
@@ -667,7 +595,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Problem Type"
-msgstr ""
+msgstr "Tipo de Problema"
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid ""
@@ -678,7 +606,7 @@ msgstr ""
 #: common/lib/xmodule/xmodule/library_content_module.py
 #: common/lib/xmodule/xmodule/lti_module.py
 msgid "Scored"
-msgstr ""
+msgstr "Avaliado"
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid ""
@@ -694,7 +622,7 @@ msgstr ""
 #. double quotes)
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "{refresh_icon} Update now."
-msgstr ""
+msgstr "{refresh_icon} Atualizar agora."
 
 #: common/lib/xmodule/xmodule/library_content_module.py
 msgid "Library is invalid, corrupt, or has been deleted."
@@ -824,7 +752,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/lti_module.py
 msgid "Weight"
-msgstr ""
+msgstr "Peso"
 
 #: common/lib/xmodule/xmodule/lti_module.py
 msgid ""
@@ -886,7 +814,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/lti_module.py
 msgid "Button Text"
-msgstr ""
+msgstr "Botão de Texto"
 
 #: common/lib/xmodule/xmodule/lti_module.py
 msgid "Enter the text on the button used to launch the third party application."
@@ -975,7 +903,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/split_test_module.py
 msgid "Group ID {group_id}"
-msgstr ""
+msgstr "Grupo ID {group_id}"
 
 #: common/lib/xmodule/xmodule/split_test_module.py
 msgid "Not Selected"
@@ -1061,32 +989,32 @@ msgstr ""
 #: common/lib/xmodule/xmodule/tabs.py
 #: lms/templates/courseware/courseware-error.html
 msgid "Courseware"
-msgstr ""
+msgstr "Material do curso"
 
 #. Translators: "Course Info" is the name of the course's information and
 #. updates page
 #: common/lib/xmodule/xmodule/tabs.py
 #: lms/djangoapps/instructor/views/instructor_dashboard.py
 msgid "Course Info"
-msgstr ""
+msgstr "Informação do Curso"
 
 #. #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
 #. Translators: "Progress" is the name of the student's course progress page
 #: common/lib/xmodule/xmodule/tabs.py
 #: lms/templates/peer_grading/peer_grading.html
 msgid "Progress"
-msgstr ""
+msgstr "Progresso"
 
 #. Translators: "Wiki" is the name of the course's wiki page
 #: common/lib/xmodule/xmodule/tabs.py lms/djangoapps/course_wiki/views.py
 #: lms/templates/wiki/base.html
 msgid "Wiki"
-msgstr ""
+msgstr "Wiki"
 
 #: common/lib/xmodule/xmodule/tabs.py cms/templates/textbooks.html
 #: cms/templates/widgets/header.html
 msgid "Textbooks"
-msgstr ""
+msgstr "Textos de apoio"
 
 #. #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
 #. Translators: "Staff grading" appears on a tab that allows
@@ -1094,20 +1022,20 @@ msgstr ""
 #: common/lib/xmodule/xmodule/tabs.py
 #: lms/templates/instructor/staff_grading.html
 msgid "Staff grading"
-msgstr ""
+msgstr "Classificação da equipa"
 
 #. Translators: "Peer grading" appears on a tab that allows
 #. students to view open-ended problems that require grading
 #: common/lib/xmodule/xmodule/tabs.py
 msgid "Peer grading"
-msgstr ""
+msgstr "Classificação dos pares"
 
 #. #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
 #. Translators: "Syllabus" appears on a tab that, when clicked, opens the
 #. syllabus of the course.
 #: common/lib/xmodule/xmodule/tabs.py lms/templates/courseware/syllabus.html
 msgid "Syllabus"
-msgstr ""
+msgstr "Plano de estudos"
 
 #. Translators: 'Instructor' appears on the tab that leads to the instructor
 #. dashboard, which is
@@ -1115,7 +1043,7 @@ msgstr ""
 #. their course
 #: common/lib/xmodule/xmodule/tabs.py
 msgid "Instructor"
-msgstr ""
+msgstr "Professor"
 
 #: common/lib/xmodule/xmodule/tabs.py
 msgid "CCX Coach"
@@ -1155,19 +1083,19 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/videoannotation_module.py
 msgid "Source URL"
-msgstr ""
+msgstr "Fonte do URL"
 
 #: common/lib/xmodule/xmodule/videoannotation_module.py
 msgid "Poster Image URL"
-msgstr ""
+msgstr "Poster URL da Imagem"
 
 #: common/lib/xmodule/xmodule/videoannotation_module.py
 msgid "Poster URL"
-msgstr ""
+msgstr "Poster URL"
 
 #: common/lib/xmodule/xmodule/word_cloud_module.py
 msgid "Inputs"
-msgstr ""
+msgstr "Entradas"
 
 #: common/lib/xmodule/xmodule/word_cloud_module.py
 msgid "Number of text boxes available for students to input words/sentences."
@@ -1387,7 +1315,7 @@ msgstr ""
 #: common/lib/xmodule/xmodule/open_ended_grading_classes/combined_open_ended_module
 #: v1.py
 msgid "Self"
-msgstr ""
+msgstr "Próprio"
 
 #. Translators: "AI" is used to denote an openended response that is machine-
 #. graded
@@ -1401,7 +1329,7 @@ msgstr ""
 #: common/lib/xmodule/xmodule/open_ended_grading_classes/combined_open_ended_module
 #: v1.py
 msgid "Peer"
-msgstr ""
+msgstr "Par"
 
 #. Translators: "Not started" is used to communicate to a student that their
 #. response
@@ -1552,19 +1480,19 @@ msgstr ""
 #. has not yet been graded
 #: common/lib/xmodule/xmodule/open_ended_grading_classes/openendedchild.py
 msgid "Not started"
-msgstr ""
+msgstr "Sem classificação"
 
 #. Translators: "In progress" communicates to a student that their response
 #. is currently in the grading process
 #: common/lib/xmodule/xmodule/open_ended_grading_classes/openendedchild.py
 msgid "In progress"
-msgstr ""
+msgstr "A decorrer"
 
 #. Translators: "Done" communicates to a student that their response
 #. has been fully graded
 #: common/lib/xmodule/xmodule/open_ended_grading_classes/openendedchild.py
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #: common/lib/xmodule/xmodule/open_ended_grading_classes/openendedchild.py
 msgid ""
@@ -1612,7 +1540,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/video_module/video_module.py
 msgid "Basic"
-msgstr ""
+msgstr "Básico"
 
 #: common/lib/xmodule/xmodule/video_module/video_module.py
 msgid ""
@@ -1801,7 +1729,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/video_module/video_xfields.py
 msgid "Text (.txt) file"
-msgstr ""
+msgstr "Texto (.txt) ficheiro"
 
 #: common/lib/xmodule/xmodule/video_module/video_xfields.py
 msgid "The last speed that the user specified for the video."
@@ -1842,7 +1770,7 @@ msgstr ""
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 msgid "Navigation"
-msgstr ""
+msgstr "Navegação"
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 msgid "About these documents"
@@ -1850,19 +1778,19 @@ msgstr ""
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 msgid "Index"
-msgstr ""
+msgstr "Índice"
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 #: lms/templates/wiki/plugins/attachments/index.html
 #: lms/templates/discussion/_thread_list_template.html
 #: lms/templates/edxnotes/edxnotes.html
 msgid "Search"
-msgstr ""
+msgstr "Procurar"
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 #: lms/templates/static_templates/copyright.html
 msgid "Copyright"
-msgstr ""
+msgstr "Direitos de autor"
 
 #: lms/djangoapps/ccx/views.py
 msgid "You must be a CCX Coach to access this view."
@@ -2102,17 +2030,17 @@ msgstr ""
 #: lms/templates/staff_problem_info.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Username"
-msgstr ""
+msgstr "Nome de utilizador"
 
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Grade"
-msgstr ""
+msgstr "Grau"
 
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Percent"
-msgstr ""
+msgstr "Por cento"
 
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 msgid "Opened by this number of students"
@@ -2133,11 +2061,11 @@ msgstr ""
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 #: lms/templates/folditchallenge.html
 msgid "Score"
-msgstr ""
+msgstr "Pontuação"
 
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 msgid "problems"
-msgstr ""
+msgstr "problemas"
 
 #. Translators: this string includes wiki markup.  Leave the ** and the _
 #. alone.
@@ -2169,7 +2097,7 @@ msgstr ""
 #. course costs nothing so it is free.
 #: lms/djangoapps/courseware/views.py
 msgid "Free"
-msgstr ""
+msgstr "Gratuito"
 
 #. Translators: The join of three or more institution names (e.g., Harvard,
 #. MIT, and Dartmouth).
@@ -2194,15 +2122,15 @@ msgstr[1] ""
 
 #: lms/djangoapps/courseware/views.py
 msgid "Invalid location."
-msgstr ""
+msgstr "Localização inválida."
 
 #: lms/djangoapps/courseware/views.py
 msgid "User {username} does not exist."
-msgstr ""
+msgstr "Utilizador {username} não existe."
 
 #: lms/djangoapps/courseware/views.py
 msgid "User {username} has never accessed problem {location}"
-msgstr ""
+msgstr "Problema no Utilizador {username} nunca acedeu {location}"
 
 #: lms/djangoapps/courseware/views.py
 msgid "You must be signed in to {platform_name} to create a certificate."
@@ -2210,7 +2138,7 @@ msgstr ""
 
 #: lms/djangoapps/courseware/views.py
 msgid "Course is not valid"
-msgstr ""
+msgstr "Curso não é válido"
 
 #: lms/djangoapps/courseware/views.py
 msgid "Your certificate will be available when you pass the course."
@@ -2273,18 +2201,18 @@ msgstr ""
 #: lms/djangoapps/dashboard/support.py
 #: lms/templates/shoppingcart/billing_details.html
 msgid "Email Address"
-msgstr ""
+msgstr "Endereço Eletrónico"
 
 #: lms/djangoapps/dashboard/support.py
 #: lms/templates/sysadmin_dashboard_gitlogs.html
 #: lms/templates/instructor/instructor_dashboard_2/add_coupon_modal.html
 #: lms/templates/instructor/instructor_dashboard_2/edit_coupon_modal.html
 msgid "Course ID"
-msgstr ""
+msgstr "Curso ID"
 
 #: lms/djangoapps/dashboard/support.py
 msgid "User not found"
-msgstr ""
+msgstr "Utilizador não encontrado"
 
 #: lms/djangoapps/dashboard/support.py
 msgid "Course {course_id} not past the refund window."
@@ -2324,7 +2252,7 @@ msgstr ""
 #. corrected".
 #: lms/djangoapps/dashboard/sysadmin.py
 msgid "fixed password"
-msgstr ""
+msgstr "a palavra-passe foi corrigida "
 
 #. Translators: this means everything happened successfully, yay!
 #: lms/djangoapps/dashboard/sysadmin.py
@@ -15371,39 +15299,39 @@ msgstr ""
 
 #: cms/templates/widgets/header.html
 msgid "Outline"
-msgstr ""
+msgstr "Esboço"
 
 #: cms/templates/widgets/header.html
 msgid "Updates"
-msgstr ""
+msgstr "Atualizações"
 
 #: cms/templates/widgets/header.html
 msgid "Schedule &amp; Details"
-msgstr ""
+msgstr "Horário &amp; Detalhes"
 
 #: cms/templates/widgets/header.html
 msgid "Checklists"
-msgstr ""
+msgstr "Listas de verificação"
 
 #: cms/templates/widgets/header.html
 msgid "Import"
-msgstr ""
+msgstr "Importar"
 
 #: cms/templates/widgets/header.html
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 #: cms/templates/widgets/header.html
 msgid "Current Library:"
-msgstr ""
+msgstr "Biblioteca Atual:"
 
 #: cms/templates/widgets/header.html
 msgid "Account"
-msgstr ""
+msgstr "Conta"
 
 #: cms/templates/widgets/header.html
 msgid "Account Navigation"
-msgstr ""
+msgstr "Conta de Navegação"
 
 #: cms/templates/widgets/header.html
 msgid "Contextual Online Help"
@@ -15411,7 +15339,7 @@ msgstr ""
 
 #: cms/templates/widgets/header.html
 msgid "Currently signed in as:"
-msgstr ""
+msgstr "Atualmente autenticado como"
 
 #: cms/templates/widgets/metadata-edit.html
 msgid "Launch Latex Source Compiler"
@@ -15435,7 +15363,7 @@ msgstr ""
 
 #: cms/templates/widgets/problem-edit.html
 msgid "Label"
-msgstr ""
+msgstr "Etiqueta"
 
 #: cms/templates/widgets/sock.html
 msgid "Looking for help with {studio_name}?"
@@ -15443,11 +15371,11 @@ msgstr ""
 
 #: cms/templates/widgets/sock.html
 msgid "Hide {studio_name} Help"
-msgstr ""
+msgstr "Ocultar {studio_name} Ajuda"
 
 #: cms/templates/widgets/sock.html
 msgid "{studio_name} Documentation"
-msgstr ""
+msgstr "{studio_name} Documentação"
 
 #: cms/templates/widgets/sock.html
 msgid ""
@@ -15467,7 +15395,7 @@ msgstr ""
 
 #: cms/templates/widgets/sock.html
 msgid "Enroll in edX101"
-msgstr ""
+msgstr "Inscreva-se em edX101"
 
 #: cms/templates/widgets/sock.html
 msgid "How to use {studio_name} to build your course"
@@ -15479,7 +15407,7 @@ msgstr ""
 
 #: cms/templates/widgets/tabs-aggregator.html
 msgid "name"
-msgstr ""
+msgstr "nome"
 
 # empty
 msgid "This is a key string."
@@ -15487,7 +15415,7 @@ msgstr ""
 
 #: wiki/admin.py wiki/models/article.py
 msgid "created"
-msgstr ""
+msgstr "criado"
 
 #: wiki/forms.py
 msgid "Only localhost... muahahaha"
@@ -15510,11 +15438,11 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Contents"
-msgstr ""
+msgstr "Conteúdo"
 
 #: wiki/forms.py
 msgid "Summary"
-msgstr ""
+msgstr "Resumo"
 
 #: wiki/forms.py
 msgid "Give a short reason for your edit, which will be stated in the revision log."
@@ -15533,11 +15461,11 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Select an option"
-msgstr ""
+msgstr "Selecione uma opção"
 
 #: wiki/forms.py
 msgid "Slug"
-msgstr ""
+msgstr "Lesma"
 
 #: wiki/forms.py
 msgid ""
@@ -15566,11 +15494,11 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Yes, I am sure"
-msgstr ""
+msgstr "Sim, eu tenho a certeza"
 
 #: wiki/forms.py
 msgid "Purge"
-msgstr ""
+msgstr "Purga"
 
 #: wiki/forms.py
 msgid ""
@@ -15590,7 +15518,7 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Lock article"
-msgstr ""
+msgstr "Artigo bloqueado"
 
 #: wiki/forms.py
 msgid "Deny all users access to edit this article."
@@ -15598,11 +15526,11 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Permissions"
-msgstr ""
+msgstr "Permissões"
 
 #: wiki/forms.py
 msgid "Owner"
-msgstr ""
+msgstr "Proprietário"
 
 #: wiki/forms.py
 msgid "Enter the username of the owner."
@@ -15610,7 +15538,7 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "(none)"
-msgstr ""
+msgstr "(nenhum)"
 
 #: wiki/forms.py
 msgid "Inherit permissions"
@@ -15644,16 +15572,16 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Filter..."
-msgstr ""
+msgstr "Filtro..."
 
 #: wiki/core/plugins/base.py
 msgid "Settings for plugin"
-msgstr ""
+msgstr "Definições para plug-in"
 
 #: wiki/models/article.py wiki/models/pluginbase.py
 #: wiki/plugins/attachments/models.py
 msgid "current revision"
-msgstr ""
+msgstr "revisão currente"
 
 #: wiki/models/article.py
 msgid ""
@@ -15671,7 +15599,7 @@ msgstr ""
 
 #: wiki/models/article.py
 msgid "owner"
-msgstr ""
+msgstr "proprietário"
 
 #: wiki/models/article.py
 msgid ""
@@ -15681,7 +15609,7 @@ msgstr ""
 
 #: wiki/models/article.py
 msgid "group"
-msgstr ""
+msgstr "grupo"
 
 #: wiki/models/article.py
 msgid ""
@@ -15691,67 +15619,67 @@ msgstr ""
 
 #: wiki/models/article.py
 msgid "group read access"
-msgstr ""
+msgstr "grupo acesso por leitura"
 
 #: wiki/models/article.py
 msgid "group write access"
-msgstr ""
+msgstr "grupo acesso por escrita"
 
 #: wiki/models/article.py
 msgid "others read access"
-msgstr ""
+msgstr "outros acesso por leitura"
 
 #: wiki/models/article.py
 msgid "others write access"
-msgstr ""
+msgstr "outros acesso por escrita"
 
 #: wiki/models/article.py
 msgid "Article without content (%(id)d)"
-msgstr ""
+msgstr "Artigo sem conteúdo (%(id)d)"
 
 #: wiki/models/article.py
 msgid "content type"
-msgstr ""
+msgstr "tipo do conteúdo"
 
 #: wiki/models/article.py
 msgid "object ID"
-msgstr ""
+msgstr "ID do objeto"
 
 #: wiki/models/article.py
 msgid "Article for object"
-msgstr ""
+msgstr "Artigo para objeto"
 
 #: wiki/models/article.py
 msgid "Articles for object"
-msgstr ""
+msgstr "Artigos para objeto"
 
 #: wiki/models/article.py
 msgid "revision number"
-msgstr ""
+msgstr "número da revisão"
 
 #: wiki/models/article.py
 msgid "IP address"
-msgstr ""
+msgstr "endereço IP"
 
 #: wiki/models/article.py
 msgid "user"
-msgstr ""
+msgstr "utilizador"
 
 #: wiki/models/article.py
 msgid "locked"
-msgstr ""
+msgstr "trancado"
 
 #: wiki/models/article.py wiki/models/pluginbase.py
 msgid "article"
-msgstr ""
+msgstr "artigo"
 
 #: wiki/models/article.py
 msgid "article contents"
-msgstr ""
+msgstr "conteúdo do artigo"
 
 #: wiki/models/article.py
 msgid "article title"
-msgstr ""
+msgstr "título do artigo"
 
 #: wiki/models/article.py
 msgid ""
@@ -15783,19 +15711,19 @@ msgstr ""
 
 #: wiki/models/urlpath.py
 msgid "slug"
-msgstr ""
+msgstr "lesma"
 
 #: wiki/models/urlpath.py
 msgid "(root)"
-msgstr ""
+msgstr "(raiz)"
 
 #: wiki/models/urlpath.py
 msgid "URL path"
-msgstr ""
+msgstr "URL caminho"
 
 #: wiki/models/urlpath.py
 msgid "URL paths"
-msgstr ""
+msgstr "URL caminhos"
 
 #: wiki/models/urlpath.py
 msgid "Sorry but you cannot have a root article with a slug."
@@ -15821,7 +15749,7 @@ msgstr ""
 
 #: wiki/models/urlpath.py
 msgid "Lost and found"
-msgstr ""
+msgstr "Perdidos e achados"
 
 #: wiki/plugins/attachments/forms.py
 msgid "A short summary of what the file contains"
@@ -15829,11 +15757,11 @@ msgstr ""
 
 #: wiki/plugins/attachments/forms.py
 msgid "Yes I am sure..."
-msgstr ""
+msgstr "Sim, eu tenho a certeza"
 
 #: wiki/plugins/attachments/markdown_extensions.py
 msgid "Click to download file"
-msgstr ""
+msgstr "Clique para descarregar o ficheiro"
 
 #: wiki/plugins/attachments/models.py
 msgid ""
@@ -15843,27 +15771,99 @@ msgstr ""
 
 #: wiki/plugins/attachments/models.py
 msgid "original filename"
-msgstr ""
+msgstr "ficheiro original"
 
 #: wiki/plugins/attachments/models.py
 msgid "attachment"
-msgstr ""
+msgstr "anexo"
 
 #: wiki/plugins/attachments/models.py
 msgid "attachments"
-msgstr ""
+msgstr "anexos"
 
 #: wiki/plugins/attachments/models.py
 msgid "file"
-msgstr ""
+msgstr "ficheiro"
 
 #: wiki/plugins/attachments/models.py
 msgid "attachment revision"
-msgstr ""
+msgstr "revisão de anexo"
 
 #: wiki/plugins/attachments/models.py
 msgid "attachment revisions"
+msgstr "revisões de anexo"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Explore edX's Support Tools"
+msgstr "Explorar Ferramentas de Suporte do EDX"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Explore the Studio Help Forum"
+msgstr "Explorar o Fórum de Ajuda do Studio"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid ""
+"Access the Studio Help forum from the menu that appears when you click your "
+"user name in the top right corner of Studio."
 msgstr ""
+"Aceda ao fórum de Ajuda do Studio a partir do menu que aparece quando você "
+"clica no seu nome de utilizador no canto superior direito do Studio."
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Visit Studio Help"
+msgstr "Visite Studio Ajuda"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Enroll in edX 101"
+msgstr "Inscreva-se em edX 101"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Register for edX 101, edX's primer for course creation."
+msgstr "Registe-se para o edX 101, iniciador do edX para a criação de curso."
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Register for edX 101"
+msgstr "Registe-se para o edX 101"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Download the Studio Documentation"
+msgstr "Descarregar a Documentação do Studio"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Download the searchable Studio reference documentation in PDF form."
+msgstr ""
+"Descarregar a documentação de referência pesquisável do Studio em formato "
+"PDF."
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Download Documentation"
+msgstr "Descarregar Documentação"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Draft Your Course About Page"
+msgstr "Esboçar o Seu Curso Página Acerca de"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Draft a Course Description"
+msgstr "Esboçar uma Descrição do Curso"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid ""
+"Courses on edX have an About page that includes a course video, description, "
+"and more. Draft the text students will read before deciding to enroll in "
+"your course."
+msgstr ""
+"Cursos no edX têm uma página Sobre o que inclui um curso de vídeo, descrição,"
+" e muito mais. Esboçar o texto dos estudantes que vão ler antes de decidirem "
+"inscrever-se no seu curso."
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Edit Course Schedule &amp; Details"
+msgstr "Editar Curso Cronograma &amp; Detalhes"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Add Staff Bios"
+msgstr "Adicionar Staff Bios"
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Draft a Rough Course Outline"
@@ -17356,8 +17356,7 @@ msgstr "As definições das suas notificações foram atualizadas. "
 
 #: wiki/plugins/notifications/forms.py
 msgid "Your notification settings were unchanged, so nothing saved."
-msgstr ""
-"As configurações das suas notificações ficaram inalteradas, nada foi gravado."
+msgstr "As configurações das suas notificações ficaram inalteradas, nada foi gravado."
 
 #: wiki/plugins/notifications/models.py
 msgid "%(user)s subscribing to %(article)s (%(type)s)"

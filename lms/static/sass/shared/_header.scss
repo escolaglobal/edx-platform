@@ -14,7 +14,7 @@ header.global {
     @include clearfix();
     height: 40px;
     margin: 0 auto;
-    padding: 18px ($baseline/2) 0;
+    padding: 10px ($baseline/2) 0;
     max-width: grid-width(12);
     width: 100%;
   }
@@ -33,7 +33,7 @@ header.global {
     @include clearfix();
     height: 40px;
     margin: 0 auto;
-    padding: 18px ($baseline/2) 0;
+    padding: 10px ($baseline/2) 0;
     max-width: grid-width(12);
     min-width: 760px;
   }
