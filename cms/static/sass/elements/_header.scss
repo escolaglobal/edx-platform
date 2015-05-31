@@ -112,13 +112,13 @@
 
   // specific elements - branding
   .branding {
-    padding: ($baseline*0.75) 0;
+    padding: 3px 0;
 
     a {
       display: block;
 
       img {
-        max-height: ($baseline*2);
+        max-height: (58);
         display: block;
       }
     }
