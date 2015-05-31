@@ -47,6 +47,7 @@
             %else:
                 <% eg_tag = "<!--blockly-tag-->"%>
                 <span id="blocklyExercise"><a>Blockly exercise wizard</a></span>
+                <span id="blocksEditor"><a>Blocks Editor</a></span>
             %endif
         </div>
             <div id="AmazingEditor" style="text-align: right; display:none; position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999; background-color:white;">
@@ -76,10 +77,15 @@ $( document ).ready(function() {
         }
     }
     $("#pythonExercise").click(function () {
-        openEditor(true);
+        openEditor(0);
     });
     $("#blocklyExercise").click(function () {
-        openEditor(false);
+        $("#save-editor-iframe").show();
+        openEditor(1);
+    });
+    $("#blocksEditor").click(function(){
+        $("#save-editor-iframe").hide();
+        openEditor(2);
     });
     $("#save-editor-iframe").click(function(){
         $("#AmazingEditor").hide();
@@ -99,24 +105,35 @@ $( document ).ready(function() {
         $("#editor-iframe").remove();
     });
 
-function openEditor(python)
+    //option 0-python 1-blockly 2-blocks
+function openEditor(option)
 {
     var url = url_base;
-    if(python)
-        url += "pythonExercises/";
-    else url += "blocklyExercises/";
-    if(idedx2 == null)
-    {
-        url += "wizard";
-        url += "?edXid="+problem_name;
-    }else
-    {
-        url += "duplicate";
-        url += "?edXid1="+idedx2+"&edXid2="+problem_name;
+    switch (option){
+        case 0:
+            url += "pythonExercises/";
+            break;
+        case 1:
+            url += "blocklyExercises/";
+            break;
+        case 2:
+            url += "blocks/wizard";
+            break;
+    }
+    if(option!=2){
+        if(idedx2 == null)
+        {
+            url += "wizard";
+            url += "?edXid="+problem_name;
+        }else
+        {
+            url += "duplicate";
+            url += "?edXid1="+idedx2+"&edXid2="+problem_name;
+        }
     }
 
     $("#AmazingEditor").append("<iframe  id=\"editor-iframe\" src=\""+url+"\" style=\" position:relative; top:-20px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; background-color: white;\">  Your browser doesn't support IFrames</iframe>");
-    console.log(" " + problem_name);
+    //console.log(" " + problem_name);
     $("#AmazingEditor").show();
 }
 });
