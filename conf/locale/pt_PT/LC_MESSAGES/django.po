@@ -94,6 +94,10 @@ msgstr "Este utilizador é um membro da Staff"
 msgid "Welcome to coding@escolaglobal!"
 msgstr "Bem-vindo ao coding@escolaglobal!"
 
+#lms/templates/register.html
+msgid "Please ask your teacher to register you in the platform."
+msgstr "Por favor pede ao teu professor para te registar na plataforma."
+
 #lms/templates/index.html
 msgid "We really like cookies."
 msgstr "Nós gostamos mesmo de bolachas."

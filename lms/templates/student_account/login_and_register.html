@@ -23,6 +23,7 @@
 </%block>
 
 <div class="section-bkg-wrapper">
+    % if initial_mode=="register":
     <div id="login-and-registration-container"
         class="login-register"
         data-initial-mode="${initial_mode}"
@@ -31,7 +32,14 @@
         data-login-form-desc='${login_form_desc|h}'
         data-registration-form-desc='${registration_form_desc|h}'
         data-password-reset-form-desc='${password_reset_form_desc|h}'
-    />
+    ></div>
+    % else:
+        <h2 class="title">
+            <span class="title-super">${_("Welcome!")}</span>
+            <span class="title-sub"${_("Please ask your teacher to register you in the platform.")}></span>
+        </h2>
+    % endif
+
 </div>
 
 % if settings.FEATURES.get('ENABLE_COMBINED_LOGIN_REGISTRATION'):

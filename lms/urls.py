@@ -99,8 +99,8 @@ if settings.FEATURES["ENABLE_COMBINED_LOGIN_REGISTRATION"]:
     urlpatterns += (
         url(r'^login$', 'student_account.views.login_and_registration_form',
             {'initial_mode': 'login'}, name="signin_user"),
-        # url(r'^register$', 'student_account.views.login_and_registration_form',
-        #    {'initial_mode': 'register'}, name="register_user"),
+        url(r'^register$', 'student_account.views.login_and_registration_form',
+           {'initial_mode': 'register'}, name="register_user"),
         url(r'^accounts/login$', 'student_account.views.login_and_registration_form',
             {'initial_mode': 'login'}, name="accounts_login"),
     )
@@ -108,7 +108,7 @@ else:
     # Serve the old views
     urlpatterns += (
         url(r'^login$', 'student.views.signin_user', name="signin_user"),
-        # url(r'^register$', 'student.views.register_user', name="register_user"),
+        url(r'^register$', 'student.views.register_user', name="register_user"),
         url(r'^accounts/login$', 'student.views.accounts_login', name="accounts_login"),
     )
 
