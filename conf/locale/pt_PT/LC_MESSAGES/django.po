@@ -17507,7 +17507,7 @@ msgstr "Discussão"
 #: lms/templates/courseware/legacy_instructor_dashboard.html
 #: lms/templates/instructor/instructor_dashboard_2/instructor_analytics.html
 msgid "Problem"
-msgstr "Prolema"
+msgstr "Problema"
 
 #: cms/djangoapps/contentstore/views/component.py
 #: common/lib/xmodule/xmodule/video_module/video_module.py

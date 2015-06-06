@@ -4328,7 +4328,7 @@ msgstr "Resposta:"
 #. student must solve.;
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 msgid "Hide Answer"
-msgstr "Respostas Escondida"
+msgstr "Esconder Resposta"
 
 #. Translators: the word Answer here refers to the answer to a problem the
 #. student must solve.;
@@ -4338,7 +4338,7 @@ msgstr "Mostrar Resposta"
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 msgid "Answer hidden"
-msgstr "Respostas escondida"
+msgstr "Resposta escondida"
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 msgid "Status: unsubmitted"
