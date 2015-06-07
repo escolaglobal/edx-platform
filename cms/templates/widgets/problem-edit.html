@@ -63,7 +63,7 @@
 %if is_escolaglobal:
 <script type="text/javascript">
 $( document ).ready(function() {
-    var url_base = "http://localhost:3000/";
+    var url_base = "http://"+document.location.hostname+"/codingisfun/";
     var problem_url = $(".xblock-editor").attr("data-locator").match("[a-z0-9]+$");
     var problem_name = problem_url[0];
     var cont_eg = $(".xml-box").text();
@@ -117,7 +117,7 @@ function openEditor(option)
             url += "blocklyExercises/";
             break;
         case 2:
-            url += "blocks/wizard";
+            url += "blocks/list";
             break;
     }
     if(option!=2){
