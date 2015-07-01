@@ -99,7 +99,7 @@ def ensure_pr_fetch():
     modified = False
     remotes = git.remote().splitlines()
     if 'edx' not in remotes:
-        git.remote("add", "edx", "https://github.com/luiscleto/edx-platform.git")
+        git.remote("add", "edx", "https://github.com/escolaglobal/edx-platform.git")
         modified = True
     # it would be nice to use the git-python API to do this, but it doesn't seem
     # to support configurations with more than one value per key. :(
